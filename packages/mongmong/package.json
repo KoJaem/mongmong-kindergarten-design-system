@@ -10,7 +10,8 @@
   "type": "module",
   "exports": "./src/index.ts",
   "files": [
-    "dist"
+    "dist",
+    "styles.css"
   ],
   "scripts": {
     "build": "tsup",
@@ -45,7 +46,7 @@
           "default": "./dist/index.cjs"
         }
       },
-      "./styles.css": "./dist/index.css"
+      "./styles.css": "./styles.css"
     }
   },
   "sideEffects": [

@@ -1,0 +1,24 @@
+name: Run tests and upload coverage
+
+on:
+  pull_request:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: jdx/mise-action@v2
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests
+        run: pnpm run test --coverage
+      # Requires a CODECOV_TOKEN repository secret. Until one is set up, this step runs
+      # against an empty token — tests above still act as the real CI signal.
+      - name: Upload code coverage
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

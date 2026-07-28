@@ -75,10 +75,10 @@ function dtsFormat(typeNamePrefix) {
  * @param {string} options.cssFile
  * @param {string} options.selector
  * @param {string} options.tsPrefix
- * @param {string} options.tsFile
+ * @param {string} options.tsBaseName base name (without extension) for the emitted .d.ts/.d.cts type files
  * @param {boolean} options.outputReferences
  */
-async function buildGroup({ setNames, cssFile, selector, tsPrefix, tsFile, outputReferences }) {
+async function buildGroup({ setNames, cssFile, selector, tsPrefix, tsBaseName, outputReferences }) {
   const sd = new StyleDictionary({
     tokens: buildSetDict(setNames),
     preprocessors: ['tokens-studio'],
@@ -93,7 +93,14 @@ async function buildGroup({ setNames, cssFile, selector, tsPrefix, tsFile, outpu
       ts: {
         transforms: ['name/kebab'],
         buildPath: `${DIST_TS}/`,
-        files: [{ destination: tsFile, format: 'dts' }],
+        // Emit identical type content under both a .d.ts and .d.cts destination: the token-names
+        // barrel (below) is published under both `import` and `require` conditions, and node16/
+        // nodenext module resolution expects a relative type import from a .d.cts file to resolve
+        // to a sibling .d.cts, not a .d.ts.
+        files: [
+          { destination: `${tsBaseName}.d.ts`, format: 'dts' },
+          { destination: `${tsBaseName}.d.cts`, format: 'dts' },
+        ],
       },
     },
   });
@@ -105,7 +112,7 @@ await buildGroup({
   cssFile: 'shared.css',
   selector: ':root',
   tsPrefix: '',
-  tsFile: 'shared.d.ts',
+  tsBaseName: 'shared',
   outputReferences: false,
 });
 
@@ -115,7 +122,7 @@ await buildGroup({
   selector: ':root',
   tsPrefix: '',
   // canonical color type names — token paths are identical between light/dark
-  tsFile: 'color.d.ts',
+  tsBaseName: 'color',
   outputReferences: false,
 });
 
@@ -124,11 +131,21 @@ await buildGroup({
   cssFile: 'color-dark.css',
   selector: '[data-theme="dark"]',
   tsPrefix: '',
-  // types already emitted by the light build above; this file is discarded
-  tsFile: '__color-dark-types-unused.d.ts',
+  // types already emitted by the light build above; these files are discarded
+  tsBaseName: '__color-dark-types-unused',
   // semantic vars reference primitive vars instead of duplicating literal hex values
   outputReferences: true,
 });
+
+// Node16/NodeNext module resolution requires relative import specifiers to carry an explicit
+// runtime extension (`./shared.js`, not `./shared`) — including from within .d.ts files, where
+// TS maps a `.js`/`.cjs` specifier onto the sibling `.d.ts`/`.d.cts` declaration file. `shared`
+// and `color` have no real runtime values (they're pure token-name union types), so emit trivial
+// placeholder modules purely so that extension-mapping resolution has a file to find.
+for (const base of ['shared', 'color']) {
+  writeFileSync(`${DIST_TS}/${base}.js`, '/** Auto-generated — do not edit directly. */\nexport {};\n');
+  writeFileSync(`${DIST_TS}/${base}.cjs`, "/** Auto-generated — do not edit directly. */\n'use strict';\n");
+}
 
 // Concatenate into one index.css (shared + light + dark, in that order — dark's
 // [data-theme="dark"] block only applies when the attribute is set, so cascade order is safe)
@@ -149,19 +166,21 @@ const bridgeCss = readFileSync('dist/index.css', 'utf-8');
 writeFileSync('dist/styles.css', `${parts.join('\n')}\n${bridgeCss}`);
 console.log('✓ dist/styles.css generated');
 
-// token-names barrel (consumed via the `./token-names` publishConfig export)
+// token-names barrel (consumed via the `./token-names` publishConfig export, both ESM and CJS)
 mkdirSync(DIST_TS, { recursive: true });
-writeFileSync(
-  `${DIST_TS}/index.d.ts`,
+
+const dtsBarrel = (ext) =>
   [
     '/** Auto-generated — do not edit directly. */',
-    "export * from './shared';",
-    "export * from './color';",
+    `export * from './shared${ext}';`,
+    `export * from './color${ext}';`,
     'export type DesignToken = SharedToken | ColorToken;',
     '/** Wraps a design token name in `var()` for use in inline styles. */',
     'export declare function cssVar<T extends DesignToken>(token: T): `var(--${T})`;\n',
-  ].join('\n'),
-);
+  ].join('\n');
+writeFileSync(`${DIST_TS}/index.d.ts`, dtsBarrel('.js'));
+writeFileSync(`${DIST_TS}/index.d.cts`, dtsBarrel('.cjs'));
+
 writeFileSync(
   `${DIST_TS}/index.js`,
   [
@@ -171,4 +190,15 @@ writeFileSync(
     '}\n',
   ].join('\n'),
 );
-console.log(`✓ ${DIST_TS}/index.js generated`);
+writeFileSync(
+  `${DIST_TS}/index.cjs`,
+  [
+    '/** Auto-generated — do not edit directly. */',
+    "'use strict';",
+    'function cssVar(token) {',
+    '  return `var(--${token})`;',
+    '}',
+    'exports.cssVar = cssVar;\n',
+  ].join('\n'),
+);
+console.log(`✓ ${DIST_TS}/index.js + index.cjs generated`);
