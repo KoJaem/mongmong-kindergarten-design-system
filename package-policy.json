@@ -1,0 +1,53 @@
+{
+  "$schema": "./package-policy.schema.json",
+  "description": "Hard rules for packages/*/package.json consistency. Scripts listed under hardRules.scripts must be present with the exact declared value (or have an allowlist entry with a reason).",
+  "hardRules": {
+    "scripts": {
+      "build": "tsup",
+      "clean": "rm -rf node_modules dist",
+      "lint": "pnpm exec biome lint",
+      "prepack": "pnpm run build",
+      "test": "vitest",
+      "typecheck": "tsc"
+    },
+    "publishConfig": {
+      "access": "public",
+      "registry": "https://npm.pkg.github.com"
+    },
+    "workspaceDependencySpec": "workspace:*",
+    "catalogDependencies": {
+      "react": "catalog:react",
+      "react-dom": "catalog:react",
+      "@types/react": "catalog:react",
+      "@types/react-dom": "catalog:react",
+      "@vanilla-extract/css": "catalog:",
+      "@vanilla-extract/recipes": "catalog:",
+      "@vanilla-extract/dynamic": "catalog:",
+      "clsx": "catalog:"
+    },
+    "sideEffectsAllowedValues": [false, ["**/*.css"]]
+  },
+  "allowlist": [
+    {
+      "packageName": "@kojaem/tokens",
+      "rule": "scripts.test",
+      "reason": "design tokens only, no tests"
+    },
+    {
+      "packageName": "@kojaem/tokens",
+      "rule": "scripts.build",
+      "reason": "tokens build runs tsup before generating Style Dictionary artifacts"
+    },
+    {
+      "packageName": "@kojaem/tokens",
+      "rule": "extraScript",
+      "fieldPath": "scripts.build:tokens",
+      "reason": "token-specific Style Dictionary generation invoked by the package build"
+    },
+    {
+      "packageName": "@kojaem/mongmong",
+      "rule": "scripts.test",
+      "reason": "aggregator package, no tests of its own"
+    }
+  ]
+}
