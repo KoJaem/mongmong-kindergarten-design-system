@@ -1,0 +1,65 @@
+{
+  "name": "@kojaem/popover",
+  "description": "Component for the mongmong kindergarten design system",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KoJaem/mongmong-kindergarten-design-system"
+  },
+  "type": "module",
+  "exports": "./src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "pnpm exec biome lint",
+    "test": "vitest",
+    "typecheck": "tsc",
+    "prepack": "pnpm run build",
+    "clean": "rm -rf node_modules dist"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "catalog:",
+    "@kojaem/tokens": "workspace:*",
+    "@vanilla-extract/recipes": "catalog:",
+    "clsx": "catalog:"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/react": "catalog:react",
+    "@vanilla-extract/css": "catalog:",
+    "happy-dom": "catalog:",
+    "react": "catalog:react",
+    "react-dom": "catalog:react",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "react": ">= 18",
+    "react-dom": ">= 18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com",
+    "exports": {
+      ".": {
+        "import": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/index.js"
+        },
+        "require": {
+          "types": "./dist/index.d.cts",
+          "default": "./dist/index.cjs"
+        }
+      },
+      "./styles.css": "./dist/index.css"
+    }
+  },
+  "sideEffects": [
+    "**/*.css"
+  ]
+}
