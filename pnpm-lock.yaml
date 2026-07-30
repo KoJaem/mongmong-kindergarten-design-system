@@ -640,12 +640,54 @@ importers:
 
   packages/mongmong:
     dependencies:
+      '@kojaem/asset':
+        specifier: workspace:*
+        version: link:../asset
+      '@kojaem/bottom-sheet':
+        specifier: workspace:*
+        version: link:../bottom-sheet
       '@kojaem/button':
         specifier: workspace:*
         version: link:../button
+      '@kojaem/card':
+        specifier: workspace:*
+        version: link:../card
+      '@kojaem/checkbox':
+        specifier: workspace:*
+        version: link:../checkbox
+      '@kojaem/chip':
+        specifier: workspace:*
+        version: link:../chip
+      '@kojaem/date-picker':
+        specifier: workspace:*
+        version: link:../date-picker
+      '@kojaem/grid-list':
+        specifier: workspace:*
+        version: link:../grid-list
+      '@kojaem/list-row':
+        specifier: workspace:*
+        version: link:../list-row
+      '@kojaem/modal':
+        specifier: workspace:*
+        version: link:../modal
+      '@kojaem/popover':
+        specifier: workspace:*
+        version: link:../popover
+      '@kojaem/result':
+        specifier: workspace:*
+        version: link:../result
+      '@kojaem/tab-bar':
+        specifier: workspace:*
+        version: link:../tab-bar
+      '@kojaem/toast':
+        specifier: workspace:*
+        version: link:../toast
       '@kojaem/tokens':
         specifier: workspace:*
         version: link:../tokens
+      '@kojaem/top-navigation':
+        specifier: workspace:*
+        version: link:../top-navigation
       react:
         specifier: '>= 18'
         version: 19.2.8
