@@ -144,6 +144,8 @@ pnpm deploy:storybook --project-token=<발급받은 토큰>
 ```
 
 > 배포된 Chromatic 링크는 **기본적으로 로그인 + 프로젝트 접근 권한이 있어야 볼 수 있습니다.** 팀원에게 보여주려면 Chromatic 프로젝트 → **Manage → Collaborators**에서 초대하세요. (아무나 링크만 있으면 볼 수 있는 게 아니라서, 코드 공개 걱정 없이 안전하게 팀 공유용으로 쓸 수 있습니다.)
+>
+> 로그인 없이 링크만으로 누구나 보게 하고 싶다면 Chromatic 프로젝트 → **Manage → Visibility**에서 Public으로 바꾸면 됩니다. 이 경우에도 테스트 결과·설정·Git 연동 정보 같은 나머지 정보는 계속 비공개로 유지되고, Storybook 화면(컴포넌트 UI)만 공개됩니다.
 
 ## Contributing
 
