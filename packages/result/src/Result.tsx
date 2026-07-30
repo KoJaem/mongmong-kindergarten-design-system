@@ -1,21 +1,30 @@
-import { type ForwardedRef, forwardRef, type HTMLAttributes } from 'react';
-
-import { Slot } from '@radix-ui/react-slot';
+import { type ForwardedRef, forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 
 import { clsx as cx } from 'clsx';
 
 import * as styles from './Result.css';
 
-export interface ResultProps extends HTMLAttributes<HTMLDivElement> {
-  asChild?: boolean;
+export interface ResultProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  image?: ReactNode;
+  title?: ReactNode;
+  description?: ReactNode;
+  action?: ReactNode;
 }
 
 export const Result = forwardRef(function Result(
-  { asChild, className: _className, ...props }: ResultProps,
+  { image, title, description, action, className: _className, ...props }: ResultProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const Comp = asChild ? Slot : 'div';
-  const className = cx(styles.result(), _className);
-
-  return <Comp ref={ref} className={className} {...props} />;
+  return (
+    <div ref={ref} className={cx(styles.result, _className)} {...props}>
+      {image && <div className={styles.image}>{image}</div>}
+      {(title || description) && (
+        <div className={styles.textContainer}>
+          {title && <p className={styles.title}>{title}</p>}
+          {description && <p className={styles.description}>{description}</p>}
+        </div>
+      )}
+      {action && <div className={styles.action}>{action}</div>}
+    </div>
+  );
 });

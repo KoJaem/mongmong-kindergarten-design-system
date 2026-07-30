@@ -1,14 +1,14 @@
 import { vars } from '@kojaem/tokens';
 
-import { recipe } from '@vanilla-extract/recipes';
+import { style } from '@vanilla-extract/css';
 
-export const tabBar = recipe({
-  base: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontFamily: vars.typography.fontFamily,
-  },
-  variants: {},
-  defaultVariants: {},
+export const tabBar = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  width: '100%',
+  paddingTop: vars.spacing.padding.xs,
+  paddingBottom: `max(${vars.spacing.padding.xs}, env(safe-area-inset-bottom))`,
+  backgroundColor: vars.color.background.default,
+  fontFamily: vars.typography.fontFamily,
 });

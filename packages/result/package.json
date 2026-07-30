@@ -21,9 +21,7 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "catalog:",
     "@kojaem/tokens": "workspace:*",
-    "@vanilla-extract/recipes": "catalog:",
     "clsx": "catalog:"
   },
   "devDependencies": {
