@@ -8,31 +8,6 @@
 
 `packages/*`에 배포 가능한 컴포넌트와 유틸리티가 위치합니다. 각 패키지는 `src/`에 구현체를, `tsup.config.ts`에 빌드 설정을, 컴포넌트 파일 옆에 테스트/스토리를 둡니다. `packages/tokens`는 공유 디자인 토큰(`tokens/tokens.json`, Figma Tokens Studio export)을 Style Dictionary로 변환해 라이트/다크 CSS 변수와 타입을 생성합니다. `packages/mongmong`은 전체 export를 집계하는 aggregator 패키지입니다. `docs/`에 Storybook용 MDX 콘텐츠가 있습니다. 공유 정적 자산은 `public/`에 둡니다. 새 컴포넌트는 폴더를 복사하지 말고 `.templates/component`와 `scripts/createComponent.ts`로 스캐폴딩하세요. 배포 패키지가 변경되면 `.changeset/`에 릴리스 노트를 추가하세요.
 
-## 빌드, 테스트, 개발 명령어
-
-```bash
-mise install                        # Node v22.22.2 + pnpm 10.33.0 설치 (.mise.toml 기반)
-pnpm install                        # 의존성 설치 (pnpm 10.33.0, Node v22.22.2)
-pnpm dev:storybook                  # Storybook 개발 서버 실행 (:6006)
-pnpm build:storybook                # Storybook 빌드
-pnpm lint                           # Biome 린트 + 패키지 정합성 체크
-pnpm format                         # Biome 포맷팅
-pnpm test                           # Vitest
-pnpm create:component               # 템플릿에서 새 컴포넌트 스캐폴딩
-pnpm cz                             # 대화형 conventional commit
-
-# 패키지 단위
-pnpm --filter @kojaem/button test
-pnpm --filter @kojaem/button build
-pnpm --filter @kojaem/button typecheck
-
-# 단일 테스트 파일 실행
-pnpm --filter @kojaem/button vitest run src/Button.test.tsx
-
-# 토큰 빌드 (Figma → CSS/TS)
-pnpm --filter @kojaem/tokens build
-```
-
 ## 컴포넌트 패턴
 
 모든 컴포넌트는 다음 구조를 따릅니다:
@@ -60,9 +35,7 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize];
 
 ## 코딩 스타일 및 네이밍 컨벤션
 
-strict TypeScript를 사용하고, 각 패키지의 `src/index.ts`에서 공개 API를 명시하세요. Biome이 포맷팅 기준입니다: 들여쓰기는 스페이스, 싱글 쿼트, 줄 너비 `120`자. 기존 네이밍 패턴을 따르세요: 패키지 폴더는 kebab-case, React 컴포넌트는 PascalCase, 테스트는 `*.test.tsx`, 스토리는 `*.stories.tsx`, vanilla-extract 스타일은 `*.css.ts`.
-
-import 순서 강제: `node → react → @kojaem/* → @vanilla-extract/* → @radix-ui/* → 외부 패키지 → 상대 경로` (그룹 사이 빈 줄). pre-commit hook이 lint-staged를 통해 `biome check --write --unsafe` 실행.
+strict TypeScript를 사용하고, 각 패키지의 `src/index.ts`에서 공개 API를 명시하세요. 기존 네이밍 패턴을 따르세요: 패키지 폴더는 kebab-case, React 컴포넌트는 PascalCase, 테스트는 `*.test.tsx`, 스토리는 `*.stories.tsx`, vanilla-extract 스타일은 `*.css.ts`.
 
 ## 테스트 가이드라인
 
@@ -70,18 +43,7 @@ import 순서 강제: `node → react → @kojaem/* → @vanilla-extract/* → @
 
 ## 커밋 및 PR 가이드라인
 
-[Conventional Commits](https://www.conventionalcommits.org/) 사용. 커밋 타입: `build | chore | ci | docs | feat | fix | perf | refactor | revert | style | test` ([`config-conventional`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) 기준). 브랜치: `<CATEGORY>/<SUBJECT>-<USERNAME>` (하이픈 최소 1개). 카테고리: `feature | fix | docs | style | refactor | test | deploy | chore | settings | design` (`design`은 Figma 토큰 동기화 브랜치, 예: `design/figma-token`). 특수 브랜치 `main`, `dev`는 규칙 제외. PR은 `.github/PULL_REQUEST_TEMPLATE.md` 준수. 배포 패키지 변경 시 `.changeset` 항목 포함.
-
-## 토큰 파이프라인
-
-`tokens/tokens.json`은 Figma Tokens Studio에서 export된 W3C Design Tokens 포맷의 단일 소스입니다. `packages/tokens/config.js`가 Style Dictionary + `@tokens-studio/sd-transforms`로 이를 변환합니다:
-- 테마 무관 값(Typography/Default, Radius/Default, Spacing/Mobile) → `shared.css` (`:root`)
-- 라이트 컬러(Primitive Colors/Light, Semantic Colors/Light) → `color-light.css` (`:root`)
-- 다크 컬러(Primitive Colors/Dark, Semantic Colors/Dark) → `color-dark.css` (`[data-theme="dark"]`)
-
-`packages/tokens/src/theme/contract.css.ts`가 vanilla-extract `createGlobalThemeContract`로 이 CSS 변수들을 `vars` 객체로 노출합니다. 값의 유일한 출처는 `tokens/tokens.json`이며, 하드코딩된 별도 토큰 모듈(과거 side 저장소에 있던 것과 같은 병행 구현)은 만들지 않습니다.
-
-Figma에서 토큰이 갱신되면 `design/figma-token` 브랜치로 push → `.github/workflows/tokens.yaml`이 빌드/타입체크/CSS diff를 검증 → `main`으로 PR이 자동 생성됩니다.
+[Conventional Commits](https://www.conventionalcommits.org/) 사용. PR은 `.github/PULL_REQUEST_TEMPLATE.md` 준수. 배포 패키지 변경 시 `.changeset` 항목 포함.
 
 ## 배포
 
