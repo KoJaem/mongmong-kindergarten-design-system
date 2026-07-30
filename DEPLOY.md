@@ -70,7 +70,11 @@ import '@kojaem/button/styles.css';   // 각 컴포넌트 스타일
 
 다크모드는 루트 엘리먼트에 `data-theme="dark"`만 붙이면 자동 적용됩니다.
 
-## 3. 나중에 패키지 스코프를 바꾸고 싶을 때 (예: `@kojaem` → `@rookeys`)
+## 3. Storybook 배포 (패키지 배포와는 별개)
+
+패키지 publish랑은 완전히 다른 흐름입니다 — Chromatic으로 배포하며, `main`에 push되면 `.github/workflows/chromatic.yaml`이 자동으로 돌립니다. 최초 1회 `CHROMATIC_PROJECT_TOKEN` secret 등록이 필요하고, 자세한 설정 방법은 [README.md의 "Storybook 배포"](./README.md#storybook-배포) 섹션을 참고하세요.
+
+## 4. 나중에 패키지 스코프를 바꾸고 싶을 때 (예: `@kojaem` → `@rookeys`)
 
 GitHub Package Registry는 스코프가 **실제 GitHub 계정/조직명과 일치**해야 동작합니다. 즉 `@rookeys`로 바꾸려면 먼저 `github.com/rookeys` 계정이나 조직이 실제로 있어야 하고(없으면 새로 만들거나, 저장소를 그 계정/조직으로 이전해야 함), 그다음에 아래 파일들을 전부 고쳐야 합니다. 하나라도 빠지면 `pnpm lint`(패키지 정합성 체크)나 배포 자체가 깨집니다.
 
