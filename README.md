@@ -125,15 +125,25 @@ pnpm dev:storybook
 1. [chromatic.com](https://www.chromatic.com/)에 GitHub 계정으로 가입 후 이 저장소를 연결하면 **프로젝트 토큰**이 발급됩니다.
 2. GitHub 저장소 → **Settings → Secrets and variables → Actions**에 `CHROMATIC_PROJECT_TOKEN`이라는 이름으로 그 토큰을 등록합니다.
 
-### 이후 배포
+### 로컬에서 빌드만 (배포 없이 미리보기)
 
-`main`에 push될 때마다 `.github/workflows/chromatic.yaml`이 자동으로 최신 Storybook을 Chromatic에 올립니다. 별도로 할 일은 없습니다.
-
-로컬에서 수동으로 올리고 싶으면:
+Chromatic에 올리지 않고 정적 파일만 만들어서 로컬에서 확인하고 싶으면:
 
 ```sh
-CHROMATIC_PROJECT_TOKEN=<발급받은 토큰> pnpm deploy:storybook
+pnpm build:storybook   # storybook-static/ 에 정적 사이트 생성
 ```
+
+### 이후 배포
+
+`main`에 push될 때마다 `.github/workflows/chromatic.yaml`이 자동으로 최신 Storybook을 빌드해서 Chromatic에 올립니다. 별도로 할 일은 없습니다.
+
+로컬에서 수동으로 올리고 싶으면 (빌드까지 알아서 됨):
+
+```sh
+pnpm deploy:storybook --project-token=<발급받은 토큰>
+```
+
+> 배포된 Chromatic 링크는 **기본적으로 로그인 + 프로젝트 접근 권한이 있어야 볼 수 있습니다.** 팀원에게 보여주려면 Chromatic 프로젝트 → **Manage → Collaborators**에서 초대하세요. (아무나 링크만 있으면 볼 수 있는 게 아니라서, 코드 공개 걱정 없이 안전하게 팀 공유용으로 쓸 수 있습니다.)
 
 ## Contributing
 
