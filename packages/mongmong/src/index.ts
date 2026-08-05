@@ -11,6 +11,7 @@ export * from '@kojaem/modal';
 export * from '@kojaem/popover';
 export * from '@kojaem/result';
 export * from '@kojaem/tab-bar';
+export * from '@kojaem/text-field';
 export * from '@kojaem/toast';
 export * from '@kojaem/tokens';
 export * from '@kojaem/top-navigation';

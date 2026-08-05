@@ -97,7 +97,7 @@ pnpm dev:storybook
 | `@kojaem/tokens` | Figma 디자인 토큰(`tokens/tokens.json`) → CSS 변수 + 타입 빌드 파이프라인 |
 | `@kojaem/asset` | 아이콘/이미지 컨테이너 (shape·size·assetType) |
 | `@kojaem/bottom-sheet` | 하단 시트 |
-| `@kojaem/button` | 버튼 (variant/size, asChild 지원) |
+| `@kojaem/button` | 버튼 (color/variant/size, asChild 지원) |
 | `@kojaem/card` | 콘텐츠 카드 컨테이너 |
 | `@kojaem/checkbox` | 체크박스 (circle/line variant) |
 | `@kojaem/chip` | 선택·필터용 칩 |
@@ -105,9 +105,10 @@ pnpm dev:storybook
 | `@kojaem/grid-list` | 그리드 형태 리스트 (`GridListItem` 포함) |
 | `@kojaem/list-row` | 리스트 행 아이템 |
 | `@kojaem/modal` | 모달 다이얼로그 |
-| `@kojaem/popover` | 툴팁/팝오버 |
+| `@kojaem/popover` | 팝오버 — `kind="tooltip"`으로 Tooltip도 함께 제공 |
 | `@kojaem/result` | 결과·빈 상태 화면 |
-| `@kojaem/tab-bar` | 하단 탭 내비게이션 (`TabBarItem` 포함) |
+| `@kojaem/tab-bar` | 하단 탭 내비게이션 — Figma의 "Bottom Navigation" (`TabBarItem` 포함) |
+| `@kojaem/text-field` | 텍스트 입력 필드 (label/helperText/error) |
 | `@kojaem/toast` | 토스트 알림 |
 | `@kojaem/top-navigation` | 상단 내비게이션 바 |
 | `@kojaem/mongmong` | 위 전체 컴포넌트 + 토큰을 한 번에 설치하는 aggregator 패키지 |
