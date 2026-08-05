@@ -3,7 +3,7 @@ import { vars } from '@kojaem/tokens';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { ButtonSize, ButtonVariant } from './Button';
+import { ButtonColor, ButtonSize, ButtonVariant } from './Button';
 
 export const iconWrapper = style({ display: 'flex', alignItems: 'center', flexShrink: 0 });
 export const iconLayout = style({ gap: vars.spacing.padding.xs });
@@ -28,36 +28,29 @@ export const button = recipe({
     },
   },
   variants: {
+    color: {
+      [ButtonColor.brand]: {},
+      [ButtonColor.neutral]: {},
+      [ButtonColor.inverse]: {},
+    },
     variant: {
-      [ButtonVariant.fill]: {
-        backgroundColor: vars.color.fill.brand,
-        color: vars.color.text.inversePrimary,
-      },
-      [ButtonVariant.outline]: {
-        backgroundColor: 'transparent',
-        border: `1px solid ${vars.color.fill.brand}`,
-        color: vars.color.fill.brand,
-      },
-      [ButtonVariant.ghost]: {
-        backgroundColor: 'transparent',
-        border: 'none',
-        color: vars.color.fill.brand,
-      },
+      [ButtonVariant.fill]: {},
+      [ButtonVariant.weak]: {},
     },
     size: {
-      [ButtonSize.sm]: {
+      [ButtonSize.s]: {
         height: '32px',
         padding: `0 ${vars.spacing.padding.s}`,
         borderRadius: vars.radius.button.s,
         fontSize: vars.typography.fontSize.captionLarge,
       },
-      [ButtonSize.md]: {
+      [ButtonSize.m]: {
         height: '40px',
         padding: `0 ${vars.spacing.padding.l}`,
         borderRadius: vars.radius.button.m,
         fontSize: vars.typography.fontSize.bodyMedium,
       },
-      [ButtonSize.lg]: {
+      [ButtonSize.l]: {
         height: '48px',
         padding: `0 ${vars.spacing.padding.xl}`,
         borderRadius: vars.radius.button.l,
@@ -71,5 +64,31 @@ export const button = recipe({
       },
     },
   },
-  defaultVariants: { variant: ButtonVariant.fill, size: ButtonSize.lg },
+  compoundVariants: [
+    {
+      variants: { color: ButtonColor.brand, variant: ButtonVariant.fill },
+      style: { backgroundColor: vars.color.fill.brand, color: vars.color.text.inversePrimary },
+    },
+    {
+      variants: { color: ButtonColor.brand, variant: ButtonVariant.weak },
+      style: { backgroundColor: vars.color.fill.brandWeak, color: vars.color.text.brand },
+    },
+    {
+      variants: { color: ButtonColor.neutral, variant: ButtonVariant.fill },
+      style: { backgroundColor: vars.color.fill.neutral, color: vars.color.text.inversePrimary },
+    },
+    {
+      variants: { color: ButtonColor.neutral, variant: ButtonVariant.weak },
+      style: { backgroundColor: vars.color.fill.neutralWeak, color: vars.color.text.primary },
+    },
+    {
+      variants: { color: ButtonColor.inverse, variant: ButtonVariant.fill },
+      style: { backgroundColor: vars.color.fill.inverse, color: vars.color.text.primary },
+    },
+    {
+      variants: { color: ButtonColor.inverse, variant: ButtonVariant.weak },
+      style: { backgroundColor: vars.color.fill.inverseWeak, color: vars.color.text.inversePrimary },
+    },
+  ],
+  defaultVariants: { color: ButtonColor.brand, variant: ButtonVariant.fill, size: ButtonSize.l },
 });
