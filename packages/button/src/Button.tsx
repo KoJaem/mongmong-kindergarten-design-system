@@ -6,13 +6,17 @@ import { clsx as cx } from 'clsx';
 
 import * as styles from './Button.css';
 
-export const ButtonVariant = { fill: 'fill', outline: 'outline', ghost: 'ghost' } as const;
+export const ButtonColor = { brand: 'brand', neutral: 'neutral', inverse: 'inverse' } as const;
+export type ButtonColor = (typeof ButtonColor)[keyof typeof ButtonColor];
+
+export const ButtonVariant = { fill: 'fill', weak: 'weak' } as const;
 export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant];
 
-export const ButtonSize = { sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' } as const;
+export const ButtonSize = { s: 's', m: 'm', l: 'l', xl: 'xl' } as const;
 export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize];
 
 export interface ButtonProps extends ComponentProps<'button'> {
+  color?: ButtonColor;
   variant?: ButtonVariant;
   size?: ButtonSize;
   leftIcon?: ReactNode;
@@ -22,8 +26,9 @@ export interface ButtonProps extends ComponentProps<'button'> {
 
 export const Button = forwardRef(function Button(
   {
+    color = ButtonColor.brand,
     variant = ButtonVariant.fill,
-    size = ButtonSize.lg,
+    size = ButtonSize.l,
     type = 'button',
     leftIcon,
     rightIcon,
@@ -37,7 +42,7 @@ export const Button = forwardRef(function Button(
 ) {
   const Comp = asChild ? Slot : 'button';
   const hasIcon = !!(leftIcon || rightIcon);
-  const className = cx(styles.button({ variant, size }), hasIcon && styles.iconLayout, _className);
+  const className = cx(styles.button({ color, variant, size }), hasIcon && styles.iconLayout, _className);
 
   return (
     <Comp ref={ref} type={type} className={className} disabled={disabled} {...props}>

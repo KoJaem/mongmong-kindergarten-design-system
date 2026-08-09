@@ -21,8 +21,23 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
+    "@kojaem/asset": "workspace:*",
+    "@kojaem/bottom-sheet": "workspace:*",
     "@kojaem/button": "workspace:*",
-    "@kojaem/tokens": "workspace:*"
+    "@kojaem/card": "workspace:*",
+    "@kojaem/checkbox": "workspace:*",
+    "@kojaem/chip": "workspace:*",
+    "@kojaem/date-picker": "workspace:*",
+    "@kojaem/grid-list": "workspace:*",
+    "@kojaem/list-row": "workspace:*",
+    "@kojaem/modal": "workspace:*",
+    "@kojaem/popover": "workspace:*",
+    "@kojaem/result": "workspace:*",
+    "@kojaem/tab-bar": "workspace:*",
+    "@kojaem/text-field": "workspace:*",
+    "@kojaem/toast": "workspace:*",
+    "@kojaem/tokens": "workspace:*",
+    "@kojaem/top-navigation": "workspace:*"
   },
   "devDependencies": {
     "tsup": "catalog:",

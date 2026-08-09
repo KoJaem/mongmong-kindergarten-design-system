@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="INTRO/Contributing" />
+
+# 새 컴포넌트 추가하기
+
+## 1. 스캐폴딩
+
+```sh
+pnpm create:component
+```
+
+`.templates/component`를 기반으로 `packages/<이름>/`에 5개 파일이 생성됩니다: `Component.tsx`,
+`Component.css.ts`, `Component.stories.tsx`, `Component.test.tsx`, `index.ts`. 폴더를 직접 복사해서
+새 컴포넌트를 만들지 마세요 — exports/publishConfig 필드가 어긋나기 쉽습니다.
+
+패키지 이름은 Figma 컴포넌트명을 그대로 kebab-case로 옮기세요(`date-picker`, `text-field`처럼).
+prop/variant 이름도 Figma의 Properties · Specs 프레임에 적힌 실제 축(예: Button의
+`color/variant/size`)을 따르세요 — 다른 디자인시스템의 관례를 그대로 가져오지 않습니다.
+
+패턴에 대한 자세한 설명은 [AGENTS.md](https://github.com/KoJaem/mongmong-kindergarten-design-system/blob/main/AGENTS.md)를
+참고하세요.
+
+## 2. 구현
+
+- 스타일은 vanilla-extract `recipe()` + `@kojaem/tokens`의 `vars`만 사용 (하드코딩 금지) — 자세한 건
+  [토큰 사용법](?path=/docs/intro-tokens--docs) 참고
+- `.stories.tsx`에 variant/size 조합을 한눈에 보이게 렌더링
+- `.test.tsx`에 접근성 상태 · variant 렌더링 · controlled/uncontrolled 동작 커버
+
+## 3. 검증
+
+```sh
+pnpm --filter @kojaem/<이름> test
+pnpm --filter @kojaem/<이름> build
+pnpm --filter @kojaem/<이름> typecheck
+pnpm dev:storybook   # 스토리 육안 확인
+```
+
+## 4. Aggregator에 등록
+
+`packages/mongmong/src/index.ts`에 `export * from '@kojaem/<이름>';` 추가, `packages/mongmong/package.json`
+`dependencies`에도 추가.
+
+## 5. Changeset 작성
+
+```sh
+pnpm changeset
+```
+
+새 컴포넌트는 `minor`, breaking prop 변경은 `major`, 버그 수정은 `patch`입니다. 형식과 배포 절차 전체는
+[DEPLOY.md](https://github.com/KoJaem/mongmong-kindergarten-design-system/blob/main/DEPLOY.md)를 참고하세요.
