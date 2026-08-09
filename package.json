@@ -45,7 +45,6 @@
     "clipanion": "4.0.0-rc.4",
     "commitizen": "^4.3.1",
     "husky": "^9.1.7",
-    "knip": "catalog:",
     "lint-staged": "^15.3.0",
     "publint": "^0.3.21",
     "sanitize.css": "^13.0.0",
