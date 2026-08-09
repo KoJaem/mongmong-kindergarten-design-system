@@ -1,0 +1,70 @@
+{
+  "name": "@kojaem/mongmong",
+  "description": "mongmong kindergarten design system — install this to get all components and tokens",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KoJaem/mongmong-kindergarten-design-system"
+  },
+  "type": "module",
+  "exports": "./src/index.ts",
+  "files": [
+    "dist",
+    "styles.css"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "pnpm exec biome lint",
+    "typecheck": "tsc",
+    "prepack": "pnpm run build",
+    "clean": "rm -rf node_modules dist"
+  },
+  "dependencies": {
+    "@kojaem/asset": "workspace:*",
+    "@kojaem/bottom-sheet": "workspace:*",
+    "@kojaem/button": "workspace:*",
+    "@kojaem/card": "workspace:*",
+    "@kojaem/checkbox": "workspace:*",
+    "@kojaem/chip": "workspace:*",
+    "@kojaem/date-picker": "workspace:*",
+    "@kojaem/grid-list": "workspace:*",
+    "@kojaem/list-row": "workspace:*",
+    "@kojaem/modal": "workspace:*",
+    "@kojaem/popover": "workspace:*",
+    "@kojaem/result": "workspace:*",
+    "@kojaem/tab-bar": "workspace:*",
+    "@kojaem/text-field": "workspace:*",
+    "@kojaem/toast": "workspace:*",
+    "@kojaem/tokens": "workspace:*",
+    "@kojaem/top-navigation": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "react": ">= 18",
+    "react-dom": ">= 18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com",
+    "exports": {
+      ".": {
+        "import": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/index.js"
+        },
+        "require": {
+          "types": "./dist/index.d.cts",
+          "default": "./dist/index.cjs"
+        }
+      },
+      "./styles.css": "./styles.css"
+    }
+  },
+  "sideEffects": [
+    "**/*.css"
+  ]
+}

@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="INTRO/Introduction" />
+
+# mongmong Design System
+
+몽몽 유치원 앱을 위한 디자인 시스템입니다. Figma에서 추출한 디자인 토큰(`tokens/tokens.json`)을 기반으로,
+라이트/다크 테마를 모두 지원하는 컴포넌트를 제공합니다.
+
+## 설치하기
+
+```sh
+npm install @kojaem/mongmong   # 전체 묶음, 또는 @kojaem/button 처럼 개별 설치
+```
+
+```ts
+import '@kojaem/tokens/styles.css'; // 디자인 토큰 (라이트/다크 CSS 변수) — 반드시 필요
+import '@kojaem/button/styles.css'; // 각 컴포넌트 스타일
+```
+
+다크모드는 루트 엘리먼트에 `data-theme="dark"`만 붙이면 자동 적용됩니다. 설치·인증 방법은
+[README의 "설치"](https://github.com/KoJaem/mongmong-kindergarten-design-system#readme) 섹션에 더 자세히 있습니다.
+
+## 다음에 볼 문서
+
+- **[토큰 사용법](?path=/docs/intro-tokens--docs)** — 색상/타이포/여백 토큰을 어떻게 참조하는지
+- **[새 컴포넌트 추가하기](?path=/docs/intro-contributing--docs)** — `pnpm create:component`부터 changeset까지
+- **[배포 절차](https://github.com/KoJaem/mongmong-kindergarten-design-system/blob/main/DEPLOY.md)** — changeset 작성 → merge → 자동 publish
+
+## 참고: 이름이 겹치는 컴포넌트
+
+Figma 문서와 다르게 느껴질 수 있는 부분을 미리 적어둡니다(재조사 방지용):
+
+- **Tooltip**은 별도 컴포넌트가 아니라 `@kojaem/popover`의 `kind="tooltip"` variant입니다.
+- **Bottom Navigation**은 별도 컴포넌트가 아니라 `@kojaem/tab-bar`입니다 — Figma에서도 같은 컴포넌트를 가리키는 두 이름입니다.

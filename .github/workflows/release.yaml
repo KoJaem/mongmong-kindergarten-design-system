@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+# Two merges landing while a release is in flight would otherwise run `changeset publish`
+# concurrently against the registry. Never cancel a run that has started: interrupting a publish
+# mid-flight is how packages end up half-released.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - name: Setup Node.js registry
+        uses: actions/setup-node@v4
+        with:
+          registry-url: https://npm.pkg.github.com
+          scope: "@kojaem"
+      - name: Install dependencies
+        run: pnpm install
+      # A failure here fails the job, so nothing reaches the registry. changesets/action does not
+      # run `publish` through a shell, so the check cannot be chained onto it — it goes before.
+      - name: Check publishability
+        run: pnpm lint:publish
+      - name: Create Release Pull Request or Publish to Github Package Registry
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset version
+          publish: pnpm changeset publish
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+        env:
+          HUSKY: 0
+          # A personal repo has no separate bot identity — GITHUB_TOKEN is tried first since it
+          # already has package publish permission when Settings > Actions > Workflow permissions
+          # is set to "Read and write". Fall back to a dedicated PAT only if that proves insufficient.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
