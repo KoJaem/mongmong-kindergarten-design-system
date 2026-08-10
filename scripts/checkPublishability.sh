@@ -10,6 +10,16 @@
 
 set -uo pipefail
 
+# `changeset publish` skips `private: true` packages with exit 0 — no error, no log. Changesets
+# still bumps the version and CHANGELOG, and sibling packages still publish depending on it, so
+# the break only surfaces later as a missing-version error for consumers. Catch it here instead.
+private_pkgs=$(grep -l '"private": true' packages/*/package.json 2>/dev/null || true)
+if [[ -n "$private_pkgs" ]]; then
+  echo "packages/* must never be private (changeset publish silently skips them):" >&2
+  echo "$private_pkgs" >&2
+  exit 1
+fi
+
 dir=$(mktemp -d)
 trap 'rm -rf "$dir"' EXIT
 
