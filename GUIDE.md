@@ -110,6 +110,7 @@ Storybook 배포(Chromatic)는 패키지 publish와 별개 흐름이며 `main` p
 |---|---|
 | [`README.md`](./README.md) | 설치, 빠른 시작, 패키지 목록 |
 | **`GUIDE.md`(이 문서)** | 배포 · 라이브러리화 · 사용법을 한 곳에서 훑어보는 진입점 |
+| [`USAGE.md`](./USAGE.md) | Next.js 등 소비 프로젝트에서 설치·CSS 로드·트러블슈팅 |
 | [`DEPLOY.md`](./DEPLOY.md) | 배포 절차 상세, 최초 설정, 스코프 변경 시나리오 |
 | [`AGENTS.md`](./AGENTS.md) | 컴포넌트 패턴 · 스타일링 규칙 · 커밋 컨벤션 (AI 에이전트/기여자용) |
 | [`docs/introduction.mdx`](./docs/introduction.mdx) | Storybook 인트로 (`pnpm dev:storybook`으로 열람) |
