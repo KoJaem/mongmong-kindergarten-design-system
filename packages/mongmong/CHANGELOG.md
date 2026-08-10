@@ -1,5 +1,13 @@
 # @kojaem/mongmong
 
+## 0.0.3
+
+### Patch Changes
+
+- ab87c85: Publish @kojaem/text-field (was skipped due to private: true) so @kojaem/mongmong installs successfully.
+- Updated dependencies [ab87c85]
+  - @kojaem/text-field@0.1.1
+
 ## 0.0.2
 
 ### Patch Changes
