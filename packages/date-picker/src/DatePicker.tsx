@@ -1,9 +1,74 @@
-import { type ForwardedRef, forwardRef, type HTMLAttributes, useMemo, useState } from 'react';
+import { type ForwardedRef, forwardRef, type HTMLAttributes, useEffect, useMemo, useRef, useState } from 'react';
 
 import { clsx as cx } from 'clsx';
 
 import * as styles from './DatePicker.css';
 import { getMonthGrid, isSameDay } from './dateGrid';
+
+const WHEEL_ITEM_HEIGHT = 44;
+const WHEEL_VISIBLE_COUNT = 5;
+const WHEEL_SCROLL_SETTLE_MS = 120;
+
+interface WheelColumnProps<T> {
+  values: T[];
+  selectedIndex: number;
+  onSelect: (index: number) => void;
+  ariaLabel: string;
+  formatValue: (value: T) => string;
+}
+
+function WheelColumn<T>({ values, selectedIndex, onSelect, ariaLabel, formatValue }: WheelColumnProps<T>) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const settleTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    containerRef.current?.scrollTo?.({ top: selectedIndex * WHEEL_ITEM_HEIGHT, behavior: 'auto' });
+  }, [selectedIndex]);
+
+  useEffect(() => () => clearTimeout(settleTimeoutRef.current), []);
+
+  const handleScroll = () => {
+    clearTimeout(settleTimeoutRef.current);
+    settleTimeoutRef.current = setTimeout(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      const index = Math.min(Math.max(Math.round(el.scrollTop / WHEEL_ITEM_HEIGHT), 0), values.length - 1);
+      if (index !== selectedIndex) onSelect(index);
+    }, WHEEL_SCROLL_SETTLE_MS);
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={styles.wheelColumn}
+      style={{
+        height: WHEEL_ITEM_HEIGHT * WHEEL_VISIBLE_COUNT,
+        paddingTop: WHEEL_ITEM_HEIGHT * Math.floor(WHEEL_VISIBLE_COUNT / 2),
+        paddingBottom: WHEEL_ITEM_HEIGHT * Math.floor(WHEEL_VISIBLE_COUNT / 2),
+      }}
+      onScroll={handleScroll}
+      role="listbox"
+      aria-label={ariaLabel}
+    >
+      {values.map((value, index) => (
+        <button
+          key={formatValue(value)}
+          type="button"
+          role="option"
+          aria-selected={index === selectedIndex}
+          className={styles.wheelItem({ selected: index === selectedIndex })}
+          style={{ height: WHEEL_ITEM_HEIGHT }}
+          onClick={() => {
+            onSelect(index);
+            containerRef.current?.scrollTo?.({ top: index * WHEEL_ITEM_HEIGHT, behavior: 'smooth' });
+          }}
+        >
+          {formatValue(value)}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export const DatePickerType = { calendar: 'calendar', wheel: 'wheel' } as const;
 export type DatePickerType = (typeof DatePickerType)[keyof typeof DatePickerType];
@@ -74,6 +139,8 @@ export const DatePicker = forwardRef(function DatePicker(
     const monthIndex = selectedDate?.getMonth() ?? viewedMonth.getMonth();
     const day = selectedDate?.getDate() ?? 1;
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+    const months = Array.from({ length: 12 }, (_, i) => i);
+    const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
     const handleWheelChange = (nextYear: number, nextMonthIndex: number, nextDay: number) => {
       const clampedDay = Math.min(nextDay, new Date(nextYear, nextMonthIndex + 1, 0).getDate());
@@ -83,42 +150,30 @@ export const DatePicker = forwardRef(function DatePicker(
     return (
       <div ref={ref} className={cx(styles.datePicker, _className)} {...props}>
         <div className={styles.wheelRow}>
-          <select
-            className={styles.wheelSelect}
-            aria-label="연도"
-            value={year}
-            onChange={(e) => handleWheelChange(Number(e.target.value), monthIndex, day)}
-          >
-            {years.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
-          <select
-            className={styles.wheelSelect}
-            aria-label="월"
-            value={monthIndex}
-            onChange={(e) => handleWheelChange(year, Number(e.target.value), day)}
-          >
-            {Array.from({ length: 12 }, (_, i) => i).map((m) => (
-              <option key={m} value={m}>
-                {m + 1}
-              </option>
-            ))}
-          </select>
-          <select
-            className={styles.wheelSelect}
-            aria-label="일"
-            value={day}
-            onChange={(e) => handleWheelChange(year, monthIndex, Number(e.target.value))}
-          >
-            {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((d) => (
-              <option key={d} value={d}>
-                {d}
-              </option>
-            ))}
-          </select>
+          <div className={styles.wheelHighlight} />
+          <div className={styles.wheelFadeTop} />
+          <div className={styles.wheelFadeBottom} />
+          <WheelColumn
+            values={years}
+            selectedIndex={Math.max(years.indexOf(year), 0)}
+            onSelect={(index) => handleWheelChange(years[index] ?? year, monthIndex, day)}
+            ariaLabel="연도"
+            formatValue={(y) => `${y}년`}
+          />
+          <WheelColumn
+            values={months}
+            selectedIndex={monthIndex}
+            onSelect={(index) => handleWheelChange(year, months[index] ?? monthIndex, day)}
+            ariaLabel="월"
+            formatValue={(m) => `${m + 1}월`}
+          />
+          <WheelColumn
+            values={days}
+            selectedIndex={day - 1}
+            onSelect={(index) => handleWheelChange(year, monthIndex, days[index] ?? day)}
+            ariaLabel="일"
+            formatValue={(d) => `${d}일`}
+          />
         </div>
       </div>
     );

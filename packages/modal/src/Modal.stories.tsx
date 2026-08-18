@@ -1,3 +1,5 @@
+import { Button } from '@kojaem/button';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Modal } from './Modal';
@@ -20,8 +22,12 @@ export const Basic: Story = {
     description: '정보가 인식됐는지 다시 확인해주세요.',
     buttons: (
       <>
-        <button type="button">아니요</button>
-        <button type="button">예</button>
+        <Button color="neutral" variant="weak" size="l">
+          아니요
+        </Button>
+        <Button color="brand" variant="fill" size="l">
+          예
+        </Button>
       </>
     ),
   },
@@ -35,8 +41,12 @@ export const VerticalButtons: Story = {
     buttonLayout: 'vertical',
     buttons: (
       <>
-        <button type="button">예</button>
-        <button type="button">아니요</button>
+        <Button color="brand" variant="fill" size="l">
+          예
+        </Button>
+        <Button color="neutral" variant="weak" size="l">
+          아니요
+        </Button>
       </>
     ),
   },
@@ -46,6 +56,10 @@ export const WithoutDescription: Story = {
   args: {
     open: true,
     title: '저장되었습니다',
-    buttons: <button type="button">확인</button>,
+    buttons: (
+      <Button color="brand" variant="fill" size="l">
+        확인
+      </Button>
+    ),
   },
 };

@@ -36,6 +36,7 @@ export const item = recipe({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    flex: 1,
     gap: vars.spacing.gap['2xs'],
     minWidth: '46px',
     paddingLeft: vars.spacing.padding.xs,
@@ -50,7 +51,7 @@ export const item = recipe({
   variants: {
     selected: {
       true: { color: vars.color.text.primary },
-      false: { color: vars.color.text.inverseTertiary },
+      false: { color: vars.color.text.tertiary },
     },
   },
   defaultVariants: { selected: false },

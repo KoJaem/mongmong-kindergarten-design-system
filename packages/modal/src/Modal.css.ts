@@ -41,7 +41,7 @@ export const title = style({
   fontSize: vars.typography.fontSize.subtitleLarge,
   lineHeight: vars.typography.lineHeight.subtitleLarge,
   letterSpacing: vars.typography.letterSpacing.subtitleLarge,
-  color: vars.color.text.inversePrimary,
+  color: vars.color.text.primary,
   margin: 0,
 });
 
@@ -51,7 +51,7 @@ export const description = style({
   fontSize: vars.typography.fontSize.bodyMedium,
   lineHeight: vars.typography.lineHeight.bodyMedium,
   letterSpacing: vars.typography.letterSpacing.bodyMedium,
-  color: vars.color.text.inverseSecondary,
+  color: vars.color.text.secondary,
   margin: 0,
 });
 

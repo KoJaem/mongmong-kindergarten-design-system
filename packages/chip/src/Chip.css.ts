@@ -8,8 +8,11 @@ import { ChipSize, ChipVariant } from './Chip';
 export const icon = style({ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 });
 
 export const dot = style({
-  width: '8px',
-  height: '8px',
+  position: 'absolute',
+  top: '2.5px',
+  right: '1px',
+  width: '6px',
+  height: '6px',
   borderRadius: '9999px',
   backgroundColor: vars.color.fill.danger,
   flexShrink: 0,
@@ -17,6 +20,7 @@ export const dot = style({
 
 export const chip = recipe({
   base: {
+    position: 'relative',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',

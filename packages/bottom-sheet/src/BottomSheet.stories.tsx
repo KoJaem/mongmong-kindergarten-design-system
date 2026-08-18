@@ -1,3 +1,5 @@
+import { Button } from '@kojaem/button';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { BottomSheet, BottomSheetButtonLayout } from './BottomSheet';
@@ -18,7 +20,11 @@ export const Basic: Story = {
     open: true,
     title: '타이틀 내용',
     description: '보조 설명을 작성해주세요.',
-    buttons: <button type="button">버튼</button>,
+    buttons: (
+      <Button color="brand" variant="fill" size="xl">
+        버튼
+      </Button>
+    ),
   },
 };
 
@@ -30,8 +36,12 @@ export const TwoButtonsHorizontal: Story = {
     buttonLayout: BottomSheetButtonLayout.horizontal,
     buttons: (
       <>
-        <button type="button">아니요</button>
-        <button type="button">예</button>
+        <Button color="neutral" variant="weak" size="xl">
+          아니요
+        </Button>
+        <Button color="brand" variant="fill" size="xl">
+          예
+        </Button>
       </>
     ),
   },
@@ -45,8 +55,12 @@ export const TwoButtonsVertical: Story = {
     buttonLayout: BottomSheetButtonLayout.vertical,
     buttons: (
       <>
-        <button type="button">예</button>
-        <button type="button">아니요</button>
+        <Button color="brand" variant="fill" size="xl">
+          예
+        </Button>
+        <Button color="neutral" variant="weak" size="xl">
+          아니요
+        </Button>
       </>
     ),
   },
@@ -57,6 +71,10 @@ export const WithContentSlot: Story = {
     open: true,
     title: '타이틀 내용',
     children: <div style={{ padding: 24, textAlign: 'center' }}>커스텀 콘텐츠</div>,
-    buttons: <button type="button">확인</button>,
+    buttons: (
+      <Button color="brand" variant="fill" size="xl">
+        확인
+      </Button>
+    ),
   },
 };

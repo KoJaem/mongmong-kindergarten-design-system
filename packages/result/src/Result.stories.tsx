@@ -1,3 +1,5 @@
+import { Button } from '@kojaem/button';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Result } from './Result';
@@ -24,7 +26,11 @@ export const Basic: Story = {
         화면을 불러오지 못했어요.
       </>
     ),
-    action: <button type="button">다시 시도하기</button>,
+    action: (
+      <Button color="brand" variant="fill" size="m">
+        다시 시도하기
+      </Button>
+    ),
   },
 };
 

@@ -18,13 +18,17 @@ export const Result = forwardRef(function Result(
   return (
     <div ref={ref} className={cx(styles.result, _className)} {...props}>
       {image && <div className={styles.image}>{image}</div>}
-      {(title || description) && (
-        <div className={styles.textContainer}>
-          {title && <p className={styles.title}>{title}</p>}
-          {description && <p className={styles.description}>{description}</p>}
+      {(title || description || action) && (
+        <div className={styles.textAndAction}>
+          {(title || description) && (
+            <div className={styles.textContainer}>
+              {title && <p className={styles.title}>{title}</p>}
+              {description && <p className={styles.description}>{description}</p>}
+            </div>
+          )}
+          {action && <div className={styles.action}>{action}</div>}
         </div>
       )}
-      {action && <div className={styles.action}>{action}</div>}
     </div>
   );
 });

@@ -20,8 +20,7 @@ export const button = recipe({
     transition: 'all 0.15s ease-in-out',
     selectors: {
       '&:disabled, &[aria-disabled="true"]': {
-        backgroundColor: vars.color.fill.neutralWeak,
-        color: vars.color.text.tertiary,
+        opacity: 0.3,
         cursor: 'not-allowed',
         pointerEvents: 'none',
       },
@@ -67,27 +66,51 @@ export const button = recipe({
   compoundVariants: [
     {
       variants: { color: ButtonColor.brand, variant: ButtonVariant.fill },
-      style: { backgroundColor: vars.color.fill.brand, color: vars.color.text.inversePrimary },
+      style: {
+        backgroundColor: vars.color.fill.brand,
+        color: vars.color.text.inversePrimary,
+        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.brandPressed } },
+      },
     },
     {
       variants: { color: ButtonColor.brand, variant: ButtonVariant.weak },
-      style: { backgroundColor: vars.color.fill.brandWeak, color: vars.color.text.brand },
+      style: {
+        backgroundColor: vars.color.fill.brandWeak,
+        color: vars.color.text.brand,
+        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.brandPressed } },
+      },
     },
     {
       variants: { color: ButtonColor.neutral, variant: ButtonVariant.fill },
-      style: { backgroundColor: vars.color.fill.neutral, color: vars.color.text.inversePrimary },
+      style: {
+        backgroundColor: vars.color.fill.neutral,
+        color: vars.color.text.inversePrimary,
+        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.pressed } },
+      },
     },
     {
       variants: { color: ButtonColor.neutral, variant: ButtonVariant.weak },
-      style: { backgroundColor: vars.color.fill.neutralWeak, color: vars.color.text.primary },
+      style: {
+        backgroundColor: vars.color.fill.neutralWeak,
+        color: vars.color.text.primary,
+        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.pressed } },
+      },
     },
     {
       variants: { color: ButtonColor.inverse, variant: ButtonVariant.fill },
-      style: { backgroundColor: vars.color.fill.inverse, color: vars.color.text.primary },
+      style: {
+        backgroundColor: vars.color.fill.inverse,
+        color: vars.color.text.primary,
+        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.inversePressed } },
+      },
     },
     {
       variants: { color: ButtonColor.inverse, variant: ButtonVariant.weak },
-      style: { backgroundColor: vars.color.fill.inverseWeak, color: vars.color.text.inversePrimary },
+      style: {
+        backgroundColor: vars.color.fill.inverseWeak,
+        color: vars.color.text.inversePrimary,
+        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.inversePressed } },
+      },
     },
   ],
   defaultVariants: { color: ButtonColor.brand, variant: ButtonVariant.fill, size: ButtonSize.l },
