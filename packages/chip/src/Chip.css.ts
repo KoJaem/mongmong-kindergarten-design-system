@@ -84,7 +84,7 @@ export const chip = recipe({
       style: {
         backgroundColor: vars.color.fill.brandWeak,
         borderColor: vars.color.fill.brandWeak,
-        color: vars.color.text.brand,
+        color: vars.color.text.brandWeak,
       },
     },
     {
