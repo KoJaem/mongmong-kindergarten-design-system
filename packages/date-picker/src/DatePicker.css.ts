@@ -84,7 +84,7 @@ export const dateCell = recipe({
   },
   variants: {
     selected: {
-      true: { backgroundColor: vars.color.fill.brand, color: vars.color.text.strong },
+      true: { backgroundColor: vars.color.fill.brand, color: vars.color.text.inversePrimary },
       false: {},
     },
     disabled: {
@@ -96,21 +96,80 @@ export const dateCell = recipe({
 });
 
 export const wheelRow = style({
+  position: 'relative',
   display: 'flex',
   gap: vars.spacing.gap.m,
   justifyContent: 'center',
   paddingLeft: vars.spacing.padding['3xl'],
   paddingRight: vars.spacing.padding['3xl'],
+  overflow: 'hidden',
 });
 
-export const wheelSelect = style({
+export const wheelColumn = style({
   flex: 1,
-  height: '42px',
-  borderRadius: vars.radius.button.m,
-  border: `1px solid ${vars.color.border.default}`,
-  backgroundColor: vars.color.background.default,
-  color: vars.color.text.primary,
-  fontFamily: vars.typography.fontFamily,
-  fontSize: vars.typography.fontSize.bodyMedium,
-  textAlign: 'center',
+  overflowY: 'scroll',
+  scrollSnapType: 'y mandatory',
+  scrollbarWidth: 'none',
+  cursor: 'grab',
+  userSelect: 'none',
+  selectors: {
+    '&::-webkit-scrollbar': { display: 'none' },
+    '&:active': { cursor: 'grabbing' },
+  },
+});
+
+export const wheelItem = recipe({
+  base: {
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: 'none',
+    background: 'transparent',
+    cursor: 'pointer',
+    scrollSnapAlign: 'center',
+    fontFamily: vars.typography.fontFamily,
+    fontWeight: vars.typography.fontWeight.bold,
+    fontSize: vars.typography.fontSize.titleLarge,
+    color: vars.color.text.tertiary,
+  },
+  variants: {
+    selected: {
+      true: { color: vars.color.text.strong },
+      false: {},
+    },
+  },
+  defaultVariants: { selected: false },
+});
+
+export const wheelHighlight = style({
+  position: 'absolute',
+  top: '50%',
+  left: 0,
+  right: 0,
+  height: '44px',
+  transform: 'translateY(-50%)',
+  borderRadius: vars.radius.datePicker.wheel,
+  backgroundColor: vars.color.fill.neutralWeak,
+  pointerEvents: 'none',
+});
+
+export const wheelFadeTop = style({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  height: '88px',
+  background: `linear-gradient(to bottom, ${vars.color.background.default}, transparent)`,
+  pointerEvents: 'none',
+});
+
+export const wheelFadeBottom = style({
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: '88px',
+  background: `linear-gradient(to top, ${vars.color.background.default}, transparent)`,
+  pointerEvents: 'none',
 });

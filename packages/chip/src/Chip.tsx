@@ -23,6 +23,7 @@ export interface ChipProps extends ComponentProps<'button'> {
   leadingIcon?: ReactNode;
   tailingIcon?: ReactNode;
   dot?: boolean;
+  wrap?: boolean;
   asChild?: boolean;
 }
 
@@ -35,6 +36,7 @@ export const Chip = forwardRef(function Chip(
     leadingIcon,
     tailingIcon,
     dot,
+    wrap = false,
     type = 'button',
     asChild,
     disabled,
@@ -54,6 +56,7 @@ export const Chip = forwardRef(function Chip(
       variant: isSelectable ? variant : undefined,
       hasLeading: !!leadingIcon,
       hasTailing: !!tailingIcon,
+      wrap,
     }),
     _className,
   );

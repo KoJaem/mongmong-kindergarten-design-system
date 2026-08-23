@@ -9,10 +9,10 @@ export const result = style({
   justifyContent: 'center',
   gap: vars.spacing.padding.l,
   width: '360px',
-  paddingTop: vars.spacing.padding['3xl'],
+  paddingTop: '32px',
   paddingBottom: '40px',
-  paddingLeft: vars.spacing.padding['3xl'],
-  paddingRight: vars.spacing.padding['3xl'],
+  paddingLeft: '40px',
+  paddingRight: '40px',
   fontFamily: vars.typography.fontFamily,
 });
 
@@ -25,11 +25,19 @@ export const image = style({
   flexShrink: 0,
 });
 
-export const textContainer = style({
+export const textAndAction = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: vars.spacing.padding.xl,
+  width: '100%',
+});
+
+export const textContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: vars.spacing.padding['2xs'],
   width: '100%',
 });
 

@@ -26,7 +26,7 @@ export const surface = recipe({
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: `${vars.spacing.padding.s} ${vars.spacing.padding.m}`,
+        padding: `${vars.spacing.padding.xs} ${vars.spacing.padding.s}`,
         color: vars.color.text.primary,
         fontWeight: vars.typography.fontWeight.bold,
         fontSize: vars.typography.fontSize.subtitleSmall,
@@ -97,6 +97,9 @@ export const description = recipe({
 
 const tailSize = '8px';
 
+// ponytail: Figma uses a custom teardrop SVG tail asset; approximated here with a rotated
+// square, which is visually close and avoids embedding a separate SVG asset. Swap to the
+// real asset if the approximation looks off in review.
 export const tail = recipe({
   base: {
     position: 'absolute',

@@ -22,7 +22,7 @@ export const item = recipe({
     cursor: 'pointer',
     fontFamily: vars.typography.fontFamily,
     selectors: {
-      '&:disabled': { cursor: 'not-allowed', opacity: 0.4 },
+      '&:disabled': { cursor: 'not-allowed', opacity: 0.5 },
     },
   },
   variants: {
@@ -30,12 +30,8 @@ export const item = recipe({
       true: { borderColor: vars.color.border.brandWeak },
       false: {},
     },
-    disabled: {
-      true: {},
-      false: {},
-    },
   },
-  defaultVariants: { selected: false, disabled: false },
+  defaultVariants: { selected: false },
 });
 
 export const image = style({
