@@ -14,6 +14,7 @@ const meta = {
     kind: { control: 'select', options: Object.values(ChipKind) },
     variant: { control: 'select', options: Object.values(ChipVariant) },
     size: { control: 'select', options: Object.values(ChipSize) },
+    wrap: { control: 'boolean' },
   },
 } satisfies Meta<typeof Chip>;
 export default meta;
@@ -76,6 +77,14 @@ export const ActionKind: Story = {
       <Chip kind={ChipKind.action} size={ChipSize.s}>
         추천
       </Chip>
+    </div>
+  ),
+};
+
+export const Wrap: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, width: 120 }}>
+      <Chip wrap>줄바꿈되는 긴 레이블 텍스트</Chip>
     </div>
   ),
 };

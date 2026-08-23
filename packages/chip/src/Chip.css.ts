@@ -30,7 +30,6 @@ export const chip = recipe({
     cursor: 'pointer',
     fontFamily: vars.typography.fontFamily,
     fontWeight: vars.typography.fontWeight.bold,
-    whiteSpace: 'nowrap',
     transition: 'all 0.15s ease-in-out',
     selectors: {
       '&:disabled': { cursor: 'not-allowed', opacity: 0.4 },
@@ -68,6 +67,10 @@ export const chip = recipe({
         borderColor: vars.color.fill.glass,
         color: vars.color.text.inverseSecondary,
       },
+    },
+    wrap: {
+      true: { whiteSpace: 'normal' },
+      false: { whiteSpace: 'nowrap' },
     },
   },
   compoundVariants: [
@@ -127,5 +130,6 @@ export const chip = recipe({
     selected: false,
     hasLeading: false,
     hasTailing: false,
+    wrap: false,
   },
 });

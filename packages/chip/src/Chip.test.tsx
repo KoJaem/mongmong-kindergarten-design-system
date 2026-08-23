@@ -69,6 +69,13 @@ test('renders as a different element via asChild', () => {
   expect(screen.getByText('Test').tagName).toBe('A');
 });
 
+test('applies a different className when wrap is enabled', () => {
+  const { container: wrapped } = render(<Chip wrap>Test</Chip>);
+  const { container: nowrap } = render(<Chip>Test</Chip>);
+
+  expect(wrapped.querySelector('button')?.className).not.toBe(nowrap.querySelector('button')?.className);
+});
+
 test('forwards ref to the underlying button', () => {
   let node: HTMLButtonElement | null = null;
   render(
