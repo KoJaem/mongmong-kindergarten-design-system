@@ -1,5 +1,11 @@
 # @kojaem/result
 
+## 0.1.1
+
+### Patch Changes
+
+- f5e2457: Fix spacing to match Figma: title/description now sit 4px apart (was 16px) inside their own group, which sits 16px from the action button; outer frame padding matches Figma's 32px top / 40px sides.
+
 ## 0.1.0
 
 ### Minor Changes

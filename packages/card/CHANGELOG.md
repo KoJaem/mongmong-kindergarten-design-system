@@ -1,5 +1,11 @@
 # @kojaem/card
 
+## 0.1.1
+
+### Patch Changes
+
+- c9dc419: Document the `radius` prop's recommended value per column count (Figma Usage guide: 3+ columns → `s`, 2 → `m`, 1 → `l`) as a JSDoc comment surfaced in Storybook's autodocs prop table.
+
 ## 0.1.0
 
 ### Minor Changes
