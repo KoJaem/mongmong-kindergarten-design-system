@@ -67,7 +67,9 @@ export const buttonArea = recipe({
   },
   variants: {
     layout: {
-      [ModalButtonLayout.horizontal]: { flexDirection: 'row' },
+      // grid + 1fr columns instead of flex:row so every button (1 or more) fills equal width without touching children directly
+      [ModalButtonLayout.horizontal]: { display: 'grid', gridAutoFlow: 'column', gridAutoColumns: '1fr' },
+      // flex:column already stretches children to full width via the default align-items:stretch
       [ModalButtonLayout.vertical]: { flexDirection: 'column' },
     },
   },
