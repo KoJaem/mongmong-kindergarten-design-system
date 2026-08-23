@@ -75,6 +75,23 @@ test('clicking a wheel year option calls onChange', () => {
   expect(calledWith.getFullYear()).toBe(2020);
 });
 
+test('dragging a wheel column with the mouse updates its scrollTop', () => {
+  render(<DatePicker type={DatePickerType.wheel} defaultValue={new Date(2026, 4, 3)} />);
+
+  const yearColumn = screen.getByRole('listbox', { name: '연도' });
+  const initialScrollTop = yearColumn.scrollTop;
+
+  fireEvent.mouseDown(yearColumn, { clientY: 200 });
+  fireEvent.mouseMove(window, { clientY: 156 });
+
+  expect(yearColumn.scrollTop).toBe(initialScrollTop + 44);
+
+  fireEvent.mouseUp(window);
+  fireEvent.mouseMove(window, { clientY: 100 });
+
+  expect(yearColumn.scrollTop).toBe(initialScrollTop + 44);
+});
+
 test('forwards ref to the underlying div', () => {
   let node: HTMLDivElement | null = null;
   render(

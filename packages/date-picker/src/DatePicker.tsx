@@ -1,4 +1,13 @@
-import { type ForwardedRef, forwardRef, type HTMLAttributes, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  type ForwardedRef,
+  forwardRef,
+  type HTMLAttributes,
+  type MouseEvent as ReactMouseEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { clsx as cx } from 'clsx';
 
@@ -20,6 +29,7 @@ interface WheelColumnProps<T> {
 function WheelColumn<T>({ values, selectedIndex, onSelect, ariaLabel, formatValue }: WheelColumnProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const settleTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const dragStateRef = useRef<{ startY: number; startScrollTop: number } | null>(null);
 
   useEffect(() => {
     containerRef.current?.scrollTo?.({ top: selectedIndex * WHEEL_ITEM_HEIGHT, behavior: 'auto' });
@@ -37,6 +47,25 @@ function WheelColumn<T>({ values, selectedIndex, onSelect, ariaLabel, formatValu
     }, WHEEL_SCROLL_SETTLE_MS);
   };
 
+  const handleMouseMove = (e: MouseEvent) => {
+    const drag = dragStateRef.current;
+    if (!drag || !containerRef.current) return;
+    containerRef.current.scrollTop = drag.startScrollTop - (e.clientY - drag.startY);
+  };
+
+  const stopDragging = () => {
+    dragStateRef.current = null;
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseup', stopDragging);
+  };
+
+  const handleMouseDown = (e: ReactMouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    dragStateRef.current = { startY: e.clientY, startScrollTop: containerRef.current.scrollTop };
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', stopDragging);
+  };
+
   return (
     <div
       ref={containerRef}
@@ -47,6 +76,7 @@ function WheelColumn<T>({ values, selectedIndex, onSelect, ariaLabel, formatValu
         paddingBottom: WHEEL_ITEM_HEIGHT * Math.floor(WHEEL_VISIBLE_COUNT / 2),
       }}
       onScroll={handleScroll}
+      onMouseDown={handleMouseDown}
       role="listbox"
       aria-label={ariaLabel}
     >

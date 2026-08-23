@@ -84,7 +84,7 @@ export const dateCell = recipe({
   },
   variants: {
     selected: {
-      true: { backgroundColor: vars.color.fill.brand, color: vars.color.text.strong },
+      true: { backgroundColor: vars.color.fill.brand, color: vars.color.text.inversePrimary },
       false: {},
     },
     disabled: {
@@ -110,8 +110,11 @@ export const wheelColumn = style({
   overflowY: 'scroll',
   scrollSnapType: 'y mandatory',
   scrollbarWidth: 'none',
+  cursor: 'grab',
+  userSelect: 'none',
   selectors: {
     '&::-webkit-scrollbar': { display: 'none' },
+    '&:active': { cursor: 'grabbing' },
   },
 });
 
