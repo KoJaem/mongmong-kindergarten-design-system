@@ -14,6 +14,7 @@ export type CardRadius = (typeof CardRadius)[keyof typeof CardRadius];
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: CardVariant;
+  /** 한 줄에 배치되는 카드 개수가 많을수록 작은 radius를 권장: 3개 이상 s, 2개 m, 1개 l. 인접 요소의 둥글기를 따르는 게 자연스러우면 더 큰 값도 허용. */
   radius?: CardRadius;
   asChild?: boolean;
 }

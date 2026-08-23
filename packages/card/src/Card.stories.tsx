@@ -26,10 +26,10 @@ export const Basic: Story = {
 };
 
 export const Variants: Story = {
-  render: () => (
+  render: (args) => (
     <div style={{ display: 'flex', gap: 16 }}>
       {Object.values(CardVariant).map((variant) => (
-        <Card key={variant} variant={variant} style={{ width: 200 }}>
+        <Card key={variant} {...args} variant={variant} style={{ width: 200 }}>
           {variant}
         </Card>
       ))}
@@ -37,11 +37,11 @@ export const Variants: Story = {
   ),
 };
 
-export const Radii: Story = {
-  render: () => (
+export const Radius: Story = {
+  render: (args) => (
     <div style={{ display: 'flex', gap: 16 }}>
       {Object.values(CardRadius).map((radius) => (
-        <Card key={radius} radius={radius} style={{ width: 160 }}>
+        <Card key={radius} {...args} radius={radius} style={{ width: 160 }}>
           radius={radius}
         </Card>
       ))}
