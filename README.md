@@ -84,11 +84,13 @@ source ~/.bashrc
 pnpm install
 ```
 
-Storybook 실행 (`http://localhost:6006`):
+로컬에서 Storybook 실행 (`http://localhost:6006`):
 
 ```sh
 pnpm dev:storybook
 ```
+
+종료는 터미널에서 `Ctrl+C`. 백그라운드로 띄웠다면 `lsof -ti :6006 | xargs kill`로 종료.
 
 ## 패키지
 

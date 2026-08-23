@@ -19,7 +19,7 @@ export const GridListItem = forwardRef(function GridListItem(
     <button
       ref={ref}
       type="button"
-      className={cx(styles.item({ selected, disabled }), _className)}
+      className={cx(styles.item({ selected }), _className)}
       disabled={disabled}
       aria-pressed={selected}
       {...props}

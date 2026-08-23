@@ -1,23 +1,23 @@
 ---
-name: "Component Design"
-about: "Define and design a new component"
+name: "컴포넌트 설계"
+about: "새로운 컴포넌트를 정의하고 설계합니다"
 labels: "enhancement"
 ---
 
-## Component Function Definition
-<!-- Please describe the main functions and use cases of this component. -->
+## 컴포넌트 기능 정의
+<!-- 이 컴포넌트의 주요 기능과 사용 사례를 설명해주세요. -->
 
-## Design Requirements
-<!-- If there are any design requirements specific to the component, please specify them. -->
+## 디자인 요구사항
+<!-- 컴포넌트에 특화된 디자인 요구사항이 있다면 명시해주세요. -->
 
-## Component Specifications
-<!-- Freely write the interface provided by the component and example usage code. -->
+## 컴포넌트 명세
+<!-- 컴포넌트가 제공할 인터페이스와 사용 예시 코드를 자유롭게 작성해주세요. -->
 
-## Technical Considerations
-<!-- If there are any technical considerations or topics that need to be discussed for the implementation of the component, please specify them. -->
+## 기술적 고려사항
+<!-- 구현 시 논의가 필요한 기술적 고려사항이나 주제가 있다면 명시해주세요. -->
 
-## Reference Materials
-<!-- If there are any reference materials that can help with the implementation of the component, please attach them. -->
+## 참고 자료
+<!-- 구현에 도움이 될 참고 자료가 있다면 첨부해주세요. -->
 
-## Additional Discussion Points
-<!-- If there are any additional points to be aware of, please specify them. -->
+## 추가 논의사항
+<!-- 추가로 알아야 할 내용이 있다면 적어주세요. -->

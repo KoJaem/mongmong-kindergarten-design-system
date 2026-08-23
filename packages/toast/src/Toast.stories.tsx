@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Toast } from './Toast';
+import { Toast, ToastLayout } from './Toast';
 
 const meta = {
   title: 'Components/Toast',
   component: Toast,
   parameters: {
     layout: 'centered',
+  },
+  argTypes: {
+    layout: { control: 'select', options: Object.values(ToastLayout) },
   },
 } satisfies Meta<typeof Toast>;
 export default meta;

@@ -1,49 +1,49 @@
 ---
-name: "Bug Report"
-about: "Report a bug"
+name: "버그 리포트"
+about: "버그를 신고합니다"
 title: "[BUG] "
 labels: "bug"
 ---
 
-## Bug Description
+## 버그 설명
 <!--
-Provide a brief and clear description of the issue that occurred.
+어떤 버그가 발생했는지 간결하고 명확하게 설명해주세요.
 -->
 
-## Steps to Reproduce
+## 재현 방법
 <!--
-Explain step-by-step how the bug occurred. Be as detailed as possible.
-1. Context: Specify the screen or state where the bug occurred.
-2. Action: Describe the actions that triggered the bug.
+버그가 발생한 과정을 단계별로 설명해주세요. 최대한 자세하게 적어주세요.
+1. 상황: 버그가 발생한 화면이나 상태를 명시해주세요.
+2. 동작: 버그를 유발한 행동을 설명해주세요.
 -->
 
-## Actual Result
+## 실제 결과
 <!--
-Describe what actually happened as a result of the bug.
+버그로 인해 실제로 어떤 일이 발생했는지 설명해주세요.
 -->
 
-## Expected Result
+## 예상 결과
 <!--
-Describe what you expected to happen if the bug did not occur.
+버그가 없었다면 어떤 결과를 기대했는지 설명해주세요.
 -->
 
-## Screenshots and Logs
+## 스크린샷 및 로그
 <!--
-If possible, attach screenshots or logs to help understand the issue.
+가능하다면 문제 파악에 도움이 되는 스크린샷이나 로그를 첨부해주세요.
 -->
 
-## Environment Information
+## 환경 정보
 <!--
-Provide information about the environment where the issue occurred.
-Fill in the following details:
+문제가 발생한 환경 정보를 제공해주세요.
+아래 항목을 채워주세요:
 -->
 
-- **Browser:**
-- **Operating System:**
-- **Package Versions:**
-- **Others:**
+- **브라우저:**
+- **운영체제:**
+- **패키지 버전:**
+- **기타:**
 
-## Additional Notes
+## 추가 노트
 <!--
-Add any other information or context about the issue that might help resolve it.
+문제 해결에 도움이 될 만한 다른 정보나 맥락이 있다면 적어주세요.
 -->

@@ -1,22 +1,22 @@
 ---
-name: Documentation Request
-about: Request new documentation or improvements to existing docs
+name: 문서 요청
+about: 새로운 문서 작성이나 기존 문서 개선을 요청합니다
 title: "[DOCS] "
 labels: documentation
 ---
 
-## Documentation Need
+## 문서화 필요 사항
 
-<!-- Describe what feature, component, or process needs documentation -->
+<!-- 어떤 기능, 컴포넌트, 프로세스에 문서화가 필요한지 설명해주세요 -->
 
-## Proposed Changes
+## 제안하는 변경 내용
 
-<!-- List the key points that should be covered -->
+<!-- 다뤄야 할 핵심 항목을 나열해주세요 -->
 
-## Target Audience
+## 대상 독자
 
-<!-- e.g., End users, developers, new contributors -->
+<!-- 예: 최종 사용자, 개발자, 신규 컨트리뷰터 -->
 
-## Additional Context
+## 추가 맥락
 
-<!-- Add screenshots, links, or references that help explain the documentation need -->
+<!-- 문서화 필요성을 설명하는 데 도움이 되는 스크린샷, 링크, 참고자료를 추가해주세요 -->

@@ -56,7 +56,7 @@ export const title = style({
   fontWeight: vars.typography.fontWeight.bold,
   fontSize: vars.typography.fontSize.titleMedium,
   lineHeight: vars.typography.lineHeight.titleMedium,
-  color: vars.color.text.inversePrimary,
+  color: vars.color.text.primary,
   paddingTop: vars.spacing.padding['2xl'],
   paddingLeft: vars.spacing.padding['3xl'],
   paddingRight: vars.spacing.padding['3xl'],
@@ -68,7 +68,7 @@ export const description = style({
   fontWeight: vars.typography.fontWeight.regular,
   fontSize: vars.typography.fontSize.bodyMedium,
   lineHeight: vars.typography.lineHeight.bodyMedium,
-  color: vars.color.text.inverseSecondary,
+  color: vars.color.text.secondary,
   paddingTop: vars.spacing.padding.s,
   paddingLeft: vars.spacing.padding['3xl'],
   paddingRight: vars.spacing.padding['3xl'],
@@ -91,7 +91,9 @@ export const buttonArea = recipe({
   },
   variants: {
     layout: {
-      [BottomSheetButtonLayout.horizontal]: { flexDirection: 'row' },
+      // grid + 1fr columns instead of flex:row so every button (1 or more) fills equal width without touching children directly
+      [BottomSheetButtonLayout.horizontal]: { display: 'grid', gridAutoFlow: 'column', gridAutoColumns: '1fr' },
+      // flex:column already stretches children to full width via the default align-items:stretch
       [BottomSheetButtonLayout.vertical]: { flexDirection: 'column' },
     },
   },

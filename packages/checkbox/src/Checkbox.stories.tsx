@@ -13,6 +13,7 @@ const meta = {
   argTypes: {
     variant: { control: 'select', options: Object.values(CheckboxVariant) },
     size: { control: 'select', options: Object.values(CheckboxSize) },
+    disabled: { control: 'boolean' },
   },
 } satisfies Meta<typeof Checkbox>;
 export default meta;

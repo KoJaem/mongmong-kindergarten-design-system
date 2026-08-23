@@ -19,7 +19,7 @@ export const side = style({
 
 export const rightSide = style({
   justifyContent: 'flex-end',
-  gap: vars.spacing.gap['2xs'],
+  gap: vars.spacing.gap.xs,
   paddingRight: vars.spacing.padding.m,
 });
 

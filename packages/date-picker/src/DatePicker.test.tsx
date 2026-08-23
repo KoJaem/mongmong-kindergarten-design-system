@@ -55,23 +55,41 @@ test('disables dates outside minDate/maxDate range', () => {
   expect(screen.getByLabelText('2026년 5월 25일')).toBeDisabled();
 });
 
-test('renders three selects for wheel type', () => {
+test('renders three scrollable columns for wheel type with the current value selected', () => {
   render(<DatePicker type={DatePickerType.wheel} defaultValue={new Date(2026, 4, 3)} />);
 
-  expect(screen.getByRole('combobox', { name: '연도' })).toHaveValue('2026');
-  expect(screen.getByRole('combobox', { name: '월' })).toHaveValue('4');
-  expect(screen.getByRole('combobox', { name: '일' })).toHaveValue('3');
+  expect(screen.getByRole('listbox', { name: '연도' })).toBeInTheDocument();
+  expect(screen.getByRole('option', { name: '2026년' })).toHaveAttribute('aria-selected', 'true');
+  expect(screen.getByRole('option', { name: '5월' })).toHaveAttribute('aria-selected', 'true');
+  expect(screen.getByRole('option', { name: '3일' })).toHaveAttribute('aria-selected', 'true');
 });
 
-test('changing the wheel year select calls onChange', () => {
+test('clicking a wheel year option calls onChange', () => {
   const onChange = vi.fn();
   render(<DatePicker type={DatePickerType.wheel} defaultValue={new Date(2026, 4, 3)} onChange={onChange} />);
 
-  fireEvent.change(screen.getByRole('combobox', { name: '연도' }), { target: { value: '2020' } });
+  fireEvent.click(screen.getByRole('option', { name: '2020년' }));
 
   expect(onChange).toHaveBeenCalledTimes(1);
   const calledWith: Date = onChange.mock.calls[0]?.[0];
   expect(calledWith.getFullYear()).toBe(2020);
+});
+
+test('dragging a wheel column with the mouse updates its scrollTop', () => {
+  render(<DatePicker type={DatePickerType.wheel} defaultValue={new Date(2026, 4, 3)} />);
+
+  const yearColumn = screen.getByRole('listbox', { name: '연도' });
+  const initialScrollTop = yearColumn.scrollTop;
+
+  fireEvent.mouseDown(yearColumn, { clientY: 200 });
+  fireEvent.mouseMove(window, { clientY: 156 });
+
+  expect(yearColumn.scrollTop).toBe(initialScrollTop + 44);
+
+  fireEvent.mouseUp(window);
+  fireEvent.mouseMove(window, { clientY: 100 });
+
+  expect(yearColumn.scrollTop).toBe(initialScrollTop + 44);
 });
 
 test('forwards ref to the underlying div', () => {
