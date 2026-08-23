@@ -1,12 +1,12 @@
-## Changes
-<!-- Please briefly describe the changes. -->
+## 변경 사항
+<!-- 어떤 변경을 했는지 간략히 설명해주세요. -->
 
-## Visuals
-<!-- If there are any screenshots or visual materials, please attach them. -->
+## 시각 자료
+<!-- 스크린샷이나 시각 자료가 있다면 첨부해주세요. -->
 
-## Checklist
-- [ ] Have you written the functional specifications?
-- [ ] Have you written the test code?
+## 체크리스트
+- [ ] 기능 명세를 작성했나요?
+- [ ] 테스트 코드를 작성했나요?
 
-## Additional Discussion Points
-<!-- If there are any additional points to be aware of, please specify them. -->
+## 추가 논의사항
+<!-- 추가로 알아야 할 내용이 있다면 적어주세요. -->

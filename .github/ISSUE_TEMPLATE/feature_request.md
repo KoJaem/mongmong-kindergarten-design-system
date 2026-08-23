@@ -1,22 +1,22 @@
 ---
-name: Feature Request
-about: Suggest an idea or enhancement for our package
+name: 기능 요청
+about: 패키지에 대한 아이디어나 개선사항을 제안합니다
 title: "[FEATURE] "
 labels: enhancement
 ---
 
-## Feature Description
+## 기능 설명
 
-<!-- Describe the feature you'd like. -->
+<!-- 원하는 기능을 설명해주세요. -->
 
-## Proposed Implementation
+## 구현 제안
 
-<!-- Share your thoughts on how this feature could be built (if you have any technical suggestions). -->
+<!-- 이 기능을 어떻게 구현할 수 있을지 기술적인 의견이 있다면 공유해주세요. -->
 
-## Describe Alternatives
+## 대안 검토
 
-<!-- A clear and concise description of any alternative solutions or features you have considered. -->
+<!-- 고려해본 다른 해결책이나 기능이 있다면 명확하고 간결하게 설명해주세요. -->
 
-## Additional Context
+## 추가 맥락
 
-<!-- Add any other context or links about the request here. -->
+<!-- 요청과 관련된 다른 맥락이나 링크가 있다면 추가해주세요. -->
