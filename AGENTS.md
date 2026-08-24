@@ -53,6 +53,24 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize];
 - 컴포넌트는 라이트(`:root`)와 다크(`[data-theme="dark"]`) 테마 모두에서 정상 동작해야 합니다. `vars.color.*`만 사용하면 자동으로 보장됩니다.
 - 각 패키지는 소비자를 위해 `./styles.css`를 export
 
+## 컴포넌트 구현 금지사항
+
+Figma 구현 시 다음을 임의로 하지 마세요:
+
+- Figma Properties 패널에 없는 variant/state를 추가로 만들지 않습니다(예: Figma에 `size(s/m/l/xl)`만 있는데 `xs`를 임의로 추가 금지).
+- 원본 텍스트·라벨·플레이스홀더를 임의로 바꾸지 않습니다. Figma에 적힌 문구를 그대로 코드/스토리에 옮기세요.
+- Figma Specs(간격, 반경, 색상)에 없는 값으로 확장하지 않습니다. 애매하면 만들지 말고 질문하세요.
+
+## 컴포넌트 너비 규칙
+
+컴포넌트 루트에 고정 `width` px 값을 하드코딩하지 않습니다. 기본값은 `width: '100%'`로 두고, 실제 크기는 부모(컨슈머)의 컨테이너/padding이 결정하게 합니다. 단, `BottomSheet`처럼 모달류가 자체 최대 너비 제약을 갖는 경우는 예외로 허용됩니다(그 경우도 Figma Specs에 명시된 값만 사용).
+
+## 에이전트 위임 규칙
+
+- Figma URL을 받아 컴포넌트를 새로 만들거나 갱신할 때 → `figma-implementer` 서브에이전트.
+- 코드를 저장하지 않고 빌드/타입/린트/테스트/토큰/스토리 상태를 빠르게 점검할 때 → `design-qa` 서브에이전트(읽기 전용, 수정 안 함).
+- 코드의 토큰 하드코딩을 감사하거나, Figma 변수와 `tokens/tokens.json`이 일치하는지 비교할 때 → `design-reviewer` 서브에이전트.
+
 ## 코딩 스타일 및 네이밍 컨벤션
 
 strict TypeScript를 사용하고, 각 패키지의 `src/index.ts`에서 공개 API를 명시하세요. 기존 네이밍 패턴을 따르세요: 패키지 폴더는 kebab-case(Figma 컴포넌트명을 그대로 옮김 — `date-picker`, `bottom-sheet`, `text-field` 등), React 컴포넌트는 PascalCase, 테스트는 `*.test.tsx`, 스토리는 `*.stories.tsx`, vanilla-extract 스타일은 `*.css.ts`.
