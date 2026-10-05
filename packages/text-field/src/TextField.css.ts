@@ -21,7 +21,8 @@ export const field = recipe({
     padding: `0 ${vars.spacing.padding.l}`,
     borderRadius: vars.radius.textField,
     border: `1px solid ${vars.color.border.brandWeak}`,
-    backgroundColor: vars.color.background.upper,
+    backgroundColor: '#F4F4F9',
+    backgroundImage: 'linear-gradient(rgba(41, 5, 255, 0.1), rgba(41, 5, 255, 0.1))',
     color: vars.color.text.primary,
     fontFamily: vars.typography.fontFamily,
     fontSize: vars.typography.fontSize.bodyLarge,
@@ -29,9 +30,9 @@ export const field = recipe({
     transition: 'background-color 0.15s ease-in-out',
     selectors: {
       '&::placeholder': { color: vars.color.text.quaternary },
-      '&:focus': { backgroundColor: vars.color.background.default },
       '&:disabled': {
         backgroundColor: vars.color.fill.inverseWeak,
+        backgroundImage: 'none',
         borderColor: vars.color.border.opacityWeak,
         color: vars.color.text.quaternary,
         cursor: 'not-allowed',

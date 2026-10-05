@@ -5,8 +5,19 @@ import { recipe } from '@vanilla-extract/recipes';
 
 import { ButtonColor, ButtonSize, ButtonVariant } from './Button';
 
-export const iconWrapper = style({ display: 'flex', alignItems: 'center', flexShrink: 0 });
+export const iconWrapper = style({
+  display: 'flex',
+  alignItems: 'center',
+  flexShrink: 0,
+});
 export const iconLayout = style({ gap: vars.spacing.padding.xs });
+export const fullWidth = style({
+  boxSizing: 'border-box',
+  width: `calc(100% - ${vars.spacing.padding['2xl']} * 2)`,
+  maxWidth: '100%',
+  marginInline: vars.spacing.padding['2xl'],
+  alignSelf: 'stretch',
+});
 
 export const button = recipe({
   base: {
@@ -69,7 +80,11 @@ export const button = recipe({
       style: {
         backgroundColor: vars.color.fill.brand,
         color: vars.color.text.inversePrimary,
-        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.brandPressed } },
+        selectors: {
+          '&:hover, &:active': {
+            backgroundColor: vars.color.fill.brandPressed,
+          },
+        },
       },
     },
     {
@@ -77,7 +92,11 @@ export const button = recipe({
       style: {
         backgroundColor: vars.color.fill.brandWeak,
         color: vars.color.text.brandWeak,
-        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.brandPressed } },
+        selectors: {
+          '&:hover, &:active': {
+            backgroundColor: vars.color.fill.brandPressed,
+          },
+        },
       },
     },
     {
@@ -85,7 +104,9 @@ export const button = recipe({
       style: {
         backgroundColor: vars.color.fill.neutral,
         color: vars.color.text.inversePrimary,
-        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.pressed } },
+        selectors: {
+          '&:hover, &:active': { backgroundColor: vars.color.fill.pressed },
+        },
       },
     },
     {
@@ -93,7 +114,9 @@ export const button = recipe({
       style: {
         backgroundColor: vars.color.fill.neutralWeak,
         color: vars.color.text.primary,
-        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.pressed } },
+        selectors: {
+          '&:hover, &:active': { backgroundColor: vars.color.fill.pressed },
+        },
       },
     },
     {
@@ -101,7 +124,11 @@ export const button = recipe({
       style: {
         backgroundColor: vars.color.fill.inverse,
         color: vars.color.text.primary,
-        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.inversePressed } },
+        selectors: {
+          '&:hover, &:active': {
+            backgroundColor: vars.color.fill.inversePressed,
+          },
+        },
       },
     },
     {
@@ -109,9 +136,17 @@ export const button = recipe({
       style: {
         backgroundColor: vars.color.fill.inverseWeak,
         color: vars.color.text.primary,
-        selectors: { '&:hover, &:active': { backgroundColor: vars.color.fill.inversePressed } },
+        selectors: {
+          '&:hover, &:active': {
+            backgroundColor: vars.color.fill.inversePressed,
+          },
+        },
       },
     },
   ],
-  defaultVariants: { color: ButtonColor.brand, variant: ButtonVariant.fill, size: ButtonSize.l },
+  defaultVariants: {
+    color: ButtonColor.brand,
+    variant: ButtonVariant.fill,
+    size: ButtonSize.l,
+  },
 });
