@@ -15,6 +15,12 @@ test('disabled button is not clickable', () => {
   expect(screen.getByRole('button')).toBeDisabled();
 });
 
+test('isFullWidth applies the full-width class', () => {
+  render(<Button isFullWidth>Click me</Button>);
+
+  expect(screen.getByRole('button').className).toContain('fullWidth');
+});
+
 test('asChild renders as the child element', () => {
   render(
     <Button asChild>
