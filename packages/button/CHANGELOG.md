@@ -1,5 +1,11 @@
 # @kojaem/button
 
+## 1.1.0
+
+### Minor Changes
+
+- 6884ca8: Add Button `isFullWidth` option that stretches the button with horizontal `padding.2xl` inset.
+
 ## 1.0.1
 
 ### Patch Changes
