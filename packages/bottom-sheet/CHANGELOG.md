@@ -1,5 +1,12 @@
 # @kojaem/bottom-sheet
 
+## 0.1.1
+
+### Patch Changes
+
+- cd27b7f: Fix the button area not filling the available width to match Figma: `horizontal` layout now uses a `1fr`-column grid so a single button spans the full width and two buttons split it evenly, instead of each button only being as wide as its label.
+- f5e2457: Fix title/description text being nearly invisible in light theme: both components used `text.inversePrimary`/`text.inverseSecondary` (near-white) on the translucent `background.upper` surface, matching the actual Figma design's dark, legible text (`text.primary`/`text.secondary`) instead.
+
 ## 0.1.0
 
 ### Minor Changes
