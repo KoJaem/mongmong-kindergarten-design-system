@@ -1,5 +1,11 @@
 # @kojaem/text-field
 
+## 0.1.3
+
+### Patch Changes
+
+- 6884ca8: Update TextField default background to a tinted surface (`#F4F4F9` + brand overlay) and drop the focus background swap; disabled still clears the overlay.
+
 ## 0.1.2
 
 ### Patch Changes
