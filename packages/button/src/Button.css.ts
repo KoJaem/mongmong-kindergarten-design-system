@@ -79,7 +79,7 @@ export const button = recipe({
       variants: { color: ButtonColor.brand, variant: ButtonVariant.fill },
       style: {
         backgroundColor: vars.color.fill.brand,
-        color: vars.color.text.inversePrimary,
+        color: vars.color.text.strong,
         selectors: {
           '&:hover, &:active': {
             backgroundColor: vars.color.fill.brandPressed,
@@ -91,7 +91,7 @@ export const button = recipe({
       variants: { color: ButtonColor.brand, variant: ButtonVariant.weak },
       style: {
         backgroundColor: vars.color.fill.brandWeak,
-        color: vars.color.text.brandWeak,
+        color: vars.color.text.brand,
         selectors: {
           '&:hover, &:active': {
             backgroundColor: vars.color.fill.brandPressed,
