@@ -56,7 +56,7 @@ export const content = style({
 export const title = recipe({
   base: {
     margin: 0,
-    color: vars.color.text.primary,
+    color: vars.color.text.inversePrimary,
     fontWeight: vars.typography.fontWeight.bold,
   },
   variants: {
@@ -77,7 +77,7 @@ export const title = recipe({
 export const description = recipe({
   base: {
     margin: 0,
-    color: vars.color.text.secondary,
+    color: vars.color.text.inverseSecondary,
     fontWeight: vars.typography.fontWeight.regular,
   },
   variants: {

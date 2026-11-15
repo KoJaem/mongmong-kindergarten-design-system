@@ -63,3 +63,36 @@ export const helperText = recipe({
   },
   defaultVariants: { error: false },
 });
+
+// Figma "Text Field / Box" Field Type=Text Area
+export const areaField = recipe({
+  base: {
+    minHeight: '54px',
+    padding: vars.spacing.padding.xl,
+    borderRadius: vars.radius.textField,
+    border: `1px solid ${vars.color.border.brandWeak}`,
+    backgroundColor: vars.color.background.upper,
+    color: vars.color.text.inversePrimary,
+    fontFamily: vars.typography.fontFamily,
+    fontSize: vars.typography.fontSize.bodyMedium,
+    lineHeight: vars.typography.lineHeight.bodyMedium,
+    outline: 'none',
+    resize: 'none',
+    selectors: {
+      '&::placeholder': { color: vars.color.text.inverseTertiary },
+      '&:disabled': {
+        backgroundColor: vars.color.fill.inverseWeak,
+        borderColor: vars.color.border.opacityWeak,
+        color: vars.color.text.quaternary,
+        cursor: 'not-allowed',
+      },
+    },
+  },
+  variants: {
+    error: {
+      true: { borderColor: vars.color.fill.danger },
+      false: {},
+    },
+  },
+  defaultVariants: { error: false },
+});
