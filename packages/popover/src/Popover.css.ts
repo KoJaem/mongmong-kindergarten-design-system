@@ -37,15 +37,19 @@ export const surface = recipe({
         display: 'flex',
         flexDirection: 'column',
         padding: vars.spacing.padding.l,
-        width: '260px',
       },
+    },
+    fixedWidth: {
+      true: {},
+      false: {},
     },
     size: {
       [PopoverSize.s]: {},
       [PopoverSize.m]: {},
     },
   },
-  defaultVariants: { kind: PopoverKind.tooltip, size: PopoverSize.s },
+  compoundVariants: [{ variants: { kind: PopoverKind.popover, fixedWidth: true }, style: { width: '260px' } }],
+  defaultVariants: { kind: PopoverKind.tooltip, size: PopoverSize.s, fixedWidth: true },
 });
 
 export const content = style({

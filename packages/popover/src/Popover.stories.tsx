@@ -12,6 +12,7 @@ const meta = {
     kind: { control: 'select', options: Object.values(PopoverKind) },
     size: { control: 'select', options: Object.values(PopoverSize) },
     tail: { control: 'select', options: Object.values(PopoverTail) },
+    fixedWidth: { control: 'boolean' },
   },
 } satisfies Meta<typeof Popover>;
 export default meta;
@@ -31,6 +32,14 @@ export const PopoverWithTitleAndDescription: Story = {
     size: PopoverSize.m,
     title: '3초 만에 이해되게 만들기',
     description: 'Less policy',
+  },
+};
+
+export const HugContent: Story = {
+  args: {
+    kind: PopoverKind.popover,
+    fixedWidth: false,
+    title: '뒹굴뒹굴~',
   },
 };
 

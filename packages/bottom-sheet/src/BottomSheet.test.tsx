@@ -71,3 +71,10 @@ test('omits title when not provided', () => {
 
   expect(screen.getByRole('dialog')).toBeInTheDocument();
 });
+
+test('preserves line breaks in title and description', () => {
+  render(<BottomSheet open title={'마지막으로\n오늘의 기분을 알려주세요'} description={'첫 줄\n둘째 줄'} />);
+
+  expect(getComputedStyle(screen.getByRole('heading')).whiteSpace).toBe('pre-line');
+  expect(getComputedStyle(screen.getByText(/첫 줄/)).whiteSpace).toBe('pre-line');
+});

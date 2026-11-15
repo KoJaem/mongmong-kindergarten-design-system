@@ -79,7 +79,8 @@ export const chip = recipe({
       style: {
         backgroundColor: vars.color.fill.neutral,
         borderColor: vars.color.fill.neutralWeak,
-        color: vars.color.text.inversePrimary,
+        // Figma binds the selected fill label to `Background/Default`, not a text token.
+        color: vars.color.background.default,
       },
     },
     {
@@ -87,7 +88,7 @@ export const chip = recipe({
       style: {
         backgroundColor: vars.color.fill.brandWeak,
         borderColor: vars.color.fill.brandWeak,
-        color: vars.color.text.brandWeak,
+        color: vars.color.text.brand,
       },
     },
     {

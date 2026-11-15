@@ -43,3 +43,10 @@ test('applies a different button area className for horizontal vs vertical layou
   const verticalButtonArea = screen.getAllByRole('button', { name: '확인' })[1]?.parentElement;
   expect(horizontalButtonArea?.className).not.toBe(verticalButtonArea?.className);
 });
+
+test('preserves line breaks in title and description', () => {
+  render(<Modal open title={'첫 줄\n둘째 줄'} description={'설명 첫 줄\n설명 둘째 줄'} />);
+
+  expect(getComputedStyle(screen.getByRole('heading')).whiteSpace).toBe('pre-line');
+  expect(getComputedStyle(screen.getByText(/설명 첫 줄/)).whiteSpace).toBe('pre-line');
+});
