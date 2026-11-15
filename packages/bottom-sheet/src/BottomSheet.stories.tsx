@@ -56,6 +56,14 @@ export const Basic: Story = {
   },
 };
 
+export const MultilineTitle: Story = {
+  ...Basic,
+  args: {
+    title: '마지막으로\n오늘의 기분을 알려주세요',
+    description: '보조 설명을 작성해주세요.',
+  },
+};
+
 export const TwoButtonsHorizontal: Story = {
   render: (args) => (
     <InteractiveBottomSheet
