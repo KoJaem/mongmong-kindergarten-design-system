@@ -1,5 +1,21 @@
 # @kojaem/mongmong
 
+## 0.0.7
+
+### Patch Changes
+
+- 6359348: Match Figma text tokens (Figma screens use the dark variable mode): Button brand fill → `text.strong`, brand weak → `text.brand`; BottomSheet and Popover title/description → `text.inversePrimary`/`text.inverseSecondary`; GridListItem label → `text.inverseSecondary`. Storybook now defaults to the dark theme with a toolbar toggle.
+- b4a9f2d: Add `TextArea` (Figma Text Field / Box, Field Type=Text Area) with the same `label`, `helperText`, `error` props as `TextField`.
+- Updated dependencies [6359348]
+- Updated dependencies [b4a9f2d]
+  - @kojaem/button@1.1.1
+  - @kojaem/bottom-sheet@0.1.2
+  - @kojaem/popover@0.1.2
+  - @kojaem/grid-list@0.1.2
+  - @kojaem/text-field@0.2.0
+  - @kojaem/modal@0.1.1
+  - @kojaem/result@0.1.1
+
 ## 0.0.6
 
 ### Patch Changes
