@@ -84,7 +84,7 @@ export const dateCell = recipe({
   },
   variants: {
     selected: {
-      true: { backgroundColor: vars.color.fill.brand, color: vars.color.text.inversePrimary },
+      true: { backgroundColor: vars.color.fill.brand, color: vars.color.text.strong },
       false: {},
     },
     disabled: {
@@ -131,11 +131,12 @@ export const wheelItem = recipe({
     fontFamily: vars.typography.fontFamily,
     fontWeight: vars.typography.fontWeight.bold,
     fontSize: vars.typography.fontSize.titleLarge,
-    color: vars.color.text.tertiary,
+    // Figma draws the wheel on a light sheet surface, so it uses inverse text tokens.
+    color: vars.color.text.inverseTertiary,
   },
   variants: {
     selected: {
-      true: { color: vars.color.text.strong },
+      true: { color: vars.color.text.inverseSecondary },
       false: {},
     },
   },

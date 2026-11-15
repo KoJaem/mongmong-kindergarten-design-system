@@ -1,3 +1,5 @@
+import { vars } from '@kojaem/tokens';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import { expect, test, vi } from 'vitest';
 
@@ -123,4 +125,26 @@ test('forwards ref to the underlying div', () => {
   );
 
   expect(node).toBeInstanceOf(HTMLDivElement);
+});
+
+// happy-dom drops unresolved var() colors from getComputedStyle, so read the last matching CSS rule instead.
+const ruleColor = (el: Element) =>
+  Array.from(document.styleSheets)
+    .flatMap((sheet) => Array.from(sheet.cssRules))
+    .filter((rule): rule is CSSStyleRule => rule instanceof CSSStyleRule && el.matches(rule.selectorText))
+    .map((rule) => rule.style.color)
+    .filter(Boolean)
+    .at(-1);
+
+test('wheel items use Figma inverse text tokens (they sit on a light sheet)', () => {
+  render(<DatePicker type={DatePickerType.wheel} defaultValue={new Date(2026, 4, 3)} />);
+
+  expect(ruleColor(screen.getByRole('option', { name: '2026년' }))).toBe(vars.color.text.inverseSecondary);
+  expect(ruleColor(screen.getByRole('option', { name: '2025년' }))).toBe(vars.color.text.inverseTertiary);
+});
+
+test('calendar selected day uses text.strong like Figma', () => {
+  render(<DatePicker defaultValue={new Date(2026, 4, 3)} />);
+
+  expect(ruleColor(screen.getByLabelText('2026년 5월 3일'))).toBe(vars.color.text.strong);
 });
