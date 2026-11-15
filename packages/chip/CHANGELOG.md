@@ -1,5 +1,11 @@
 # @kojaem/chip
 
+## 0.1.2
+
+### Patch Changes
+
+- 189c9fa: Close Figma design gaps: Popover `fixedWidth` prop (Figma `Fixed Width`, default `true`; `false` hugs content for `kind="popover"`); DatePicker `unit` prop (`"day" | "month"`, default `"day"`; `"month"` hides the wheel day column and `onChange` receives the 1st of the month); BottomSheet and Modal title/description preserve `\n` line breaks (`white-space: pre-line`); Chip selected label colors match Figma dark mode (fill → `background.default`, weak → `text.brand`). DatePicker wheel items use Figma inverse text tokens (`text.inverseTertiary`, selected `text.inverseSecondary`) and the calendar selected day uses `text.strong`.
+
 ## 0.1.1
 
 ### Patch Changes
