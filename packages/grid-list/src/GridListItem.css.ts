@@ -62,7 +62,7 @@ export const label = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  color: vars.color.text.secondary,
+  color: vars.color.text.inverseSecondary,
   fontWeight: vars.typography.fontWeight.regular,
   fontSize: vars.typography.fontSize.bodyMedium,
   lineHeight: vars.typography.lineHeight.bodyMedium,
