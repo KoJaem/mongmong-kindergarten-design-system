@@ -32,6 +32,16 @@ test.each(Object.values(PopoverTail))('renders with tail=%s', (tail) => {
   expect(screen.getByText('Test')).toBeInTheDocument();
 });
 
+test('fixedWidth=false hugs content (no fixed 260px width) for popover kind', () => {
+  render(<Popover kind={PopoverKind.popover} title="fixed" />);
+  render(<Popover kind={PopoverKind.popover} fixedWidth={false} title="hug" />);
+
+  const fixed = screen.getByText('fixed').parentElement?.parentElement as HTMLElement;
+  const hug = screen.getByText('hug').parentElement?.parentElement as HTMLElement;
+  expect(getComputedStyle(fixed).width).toBe('260px');
+  expect(getComputedStyle(hug).width).not.toBe('260px');
+});
+
 test('renders as a different element via asChild', () => {
   render(
     <Popover asChild>

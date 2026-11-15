@@ -21,6 +21,8 @@ export interface PopoverProps extends Omit<HTMLAttributes<HTMLDivElement>, 'titl
   title?: ReactNode;
   description?: ReactNode;
   tail?: PopoverTail;
+  /** Figma `Fixed Width`. `false` hugs the content (popover kind only). */
+  fixedWidth?: boolean;
   asChild?: boolean;
 }
 
@@ -31,6 +33,7 @@ export const Popover = forwardRef(function Popover(
     title,
     description,
     tail = PopoverTail.bottom,
+    fixedWidth = true,
     asChild,
     className: _className,
     children,
@@ -43,7 +46,7 @@ export const Popover = forwardRef(function Popover(
 
   return (
     <div className={styles.wrapper}>
-      <Comp ref={ref} className={cx(styles.surface({ kind, size }), _className)} {...props}>
+      <Comp ref={ref} className={cx(styles.surface({ kind, size, fixedWidth }), _className)} {...props}>
         {isPopover ? (
           <div className={styles.content}>
             {title && <p className={styles.title({ size })}>{title}</p>}
