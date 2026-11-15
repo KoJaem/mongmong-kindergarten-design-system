@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { expect, test, vi } from 'vitest';
 
-import { DatePicker, DatePickerType } from './DatePicker';
+import { DatePicker, DatePickerType, DatePickerUnit } from './DatePicker';
 
 test('renders the current month by default', () => {
   const now = new Date();
@@ -73,6 +73,26 @@ test('clicking a wheel year option calls onChange', () => {
   expect(onChange).toHaveBeenCalledTimes(1);
   const calledWith: Date = onChange.mock.calls[0]?.[0];
   expect(calledWith.getFullYear()).toBe(2020);
+});
+
+test('unit=month hides the day column and onChange gives the 1st of the month', () => {
+  const onChange = vi.fn();
+  render(
+    <DatePicker
+      type={DatePickerType.wheel}
+      unit={DatePickerUnit.month}
+      defaultValue={new Date(2026, 4, 15)}
+      onChange={onChange}
+    />,
+  );
+
+  expect(screen.getAllByRole('listbox')).toHaveLength(2);
+  expect(screen.queryByRole('listbox', { name: '일' })).not.toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole('option', { name: '8월' }));
+
+  const calledWith: Date = onChange.mock.calls[0]?.[0];
+  expect([calledWith.getFullYear(), calledWith.getMonth(), calledWith.getDate()]).toEqual([2026, 7, 1]);
 });
 
 test('dragging a wheel column with the mouse updates its scrollTop', () => {
