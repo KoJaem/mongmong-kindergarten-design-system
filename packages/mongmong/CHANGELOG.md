@@ -1,5 +1,29 @@
 # @kojaem/mongmong
 
+## 0.0.9
+
+### Patch Changes
+
+- a085892: Dark theme `text.brand` now uses `Purple.400` (#8E87F7) to match the Figma `Text/Brand` variable in Dark mode (was `Purple.300` #6A62EA).
+- Updated dependencies [a085892]
+  - @kojaem/tokens@0.2.1
+  - @kojaem/asset@0.1.1
+  - @kojaem/bottom-sheet@0.1.4
+  - @kojaem/button@1.1.2
+  - @kojaem/card@0.1.2
+  - @kojaem/checkbox@0.1.1
+  - @kojaem/chip@0.1.3
+  - @kojaem/date-picker@0.2.1
+  - @kojaem/grid-list@0.1.3
+  - @kojaem/list-row@0.1.1
+  - @kojaem/modal@0.1.3
+  - @kojaem/popover@0.2.1
+  - @kojaem/result@0.1.2
+  - @kojaem/tab-bar@0.1.2
+  - @kojaem/text-field@0.2.1
+  - @kojaem/toast@0.1.1
+  - @kojaem/top-navigation@0.1.2
+
 ## 0.0.8
 
 ### Patch Changes
