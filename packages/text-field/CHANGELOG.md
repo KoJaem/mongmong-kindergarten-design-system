@@ -1,5 +1,11 @@
 # @kojaem/text-field
 
+## 0.2.0
+
+### Minor Changes
+
+- b4a9f2d: Add `TextArea` (Figma Text Field / Box, Field Type=Text Area) with the same `label`, `helperText`, `error` props as `TextField`.
+
 ## 0.1.3
 
 ### Patch Changes

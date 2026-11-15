@@ -1,5 +1,11 @@
 # @kojaem/button
 
+## 1.1.1
+
+### Patch Changes
+
+- 6359348: Match Figma text tokens (Figma screens use the dark variable mode): Button brand fill → `text.strong`, brand weak → `text.brand`; BottomSheet and Popover title/description → `text.inversePrimary`/`text.inverseSecondary`; GridListItem label → `text.inverseSecondary`. Storybook now defaults to the dark theme with a toolbar toggle.
+
 ## 1.1.0
 
 ### Minor Changes

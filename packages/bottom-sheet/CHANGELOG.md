@@ -1,5 +1,11 @@
 # @kojaem/bottom-sheet
 
+## 0.1.2
+
+### Patch Changes
+
+- 6359348: Match Figma text tokens (Figma screens use the dark variable mode): Button brand fill → `text.strong`, brand weak → `text.brand`; BottomSheet and Popover title/description → `text.inversePrimary`/`text.inverseSecondary`; GridListItem label → `text.inverseSecondary`. Storybook now defaults to the dark theme with a toolbar toggle.
+
 ## 0.1.1
 
 ### Patch Changes
