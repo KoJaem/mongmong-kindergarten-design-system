@@ -1,5 +1,17 @@
 # @kojaem/mongmong
 
+## 0.0.8
+
+### Patch Changes
+
+- 189c9fa: Close Figma design gaps: Popover `fixedWidth` prop (Figma `Fixed Width`, default `true`; `false` hugs content for `kind="popover"`); DatePicker `unit` prop (`"day" | "month"`, default `"day"`; `"month"` hides the wheel day column and `onChange` receives the 1st of the month); BottomSheet and Modal title/description preserve `\n` line breaks (`white-space: pre-line`); Chip selected label colors match Figma dark mode (fill → `background.default`, weak → `text.brand`). DatePicker wheel items use Figma inverse text tokens (`text.inverseTertiary`, selected `text.inverseSecondary`) and the calendar selected day uses `text.strong`.
+- Updated dependencies [189c9fa]
+  - @kojaem/popover@0.2.0
+  - @kojaem/date-picker@0.2.0
+  - @kojaem/bottom-sheet@0.1.3
+  - @kojaem/modal@0.1.2
+  - @kojaem/chip@0.1.2
+
 ## 0.0.7
 
 ### Patch Changes
