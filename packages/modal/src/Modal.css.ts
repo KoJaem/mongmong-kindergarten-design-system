@@ -36,6 +36,7 @@ export const textContainer = style({
 });
 
 export const title = style({
+  whiteSpace: 'pre-line',
   fontFamily: vars.typography.fontFamily,
   fontWeight: vars.typography.fontWeight.bold,
   fontSize: vars.typography.fontSize.subtitleLarge,
@@ -46,6 +47,7 @@ export const title = style({
 });
 
 export const description = style({
+  whiteSpace: 'pre-line',
   fontFamily: vars.typography.fontFamily,
   fontWeight: vars.typography.fontWeight.regular,
   fontSize: vars.typography.fontSize.bodyMedium,

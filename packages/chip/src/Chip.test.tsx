@@ -1,3 +1,5 @@
+import { vars } from '@kojaem/tokens';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import { expect, test, vi } from 'vitest';
 
@@ -89,4 +91,25 @@ test('forwards ref to the underlying button', () => {
   );
 
   expect(node).toBeInstanceOf(HTMLButtonElement);
+});
+
+// Figma (Dark mode) binds the selected Fill label to `Background/Default` and the selected Weak label to `Text/Brand`.
+test.each([
+  [ChipVariant.fill, vars.color.background.default],
+  [ChipVariant.weak, vars.color.text.brand],
+])('selected %s chip uses the Figma label color token', (variant, color) => {
+  render(
+    <Chip selected variant={variant}>
+      Test
+    </Chip>,
+  );
+
+  // happy-dom drops unresolved var() colors from getComputedStyle, so read the matching CSS rules instead.
+  const button = screen.getByRole('button');
+  const colors = Array.from(document.styleSheets)
+    .flatMap((sheet) => Array.from(sheet.cssRules))
+    .filter((rule): rule is CSSStyleRule => rule instanceof CSSStyleRule && button.matches(rule.selectorText))
+    .map((rule) => rule.style.color)
+    .filter(Boolean);
+  expect(colors.at(-1)).toBe(color);
 });

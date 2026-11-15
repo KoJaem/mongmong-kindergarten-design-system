@@ -103,10 +103,16 @@ function WheelColumn<T>({ values, selectedIndex, onSelect, ariaLabel, formatValu
 export const DatePickerType = { calendar: 'calendar', wheel: 'wheel' } as const;
 export type DatePickerType = (typeof DatePickerType)[keyof typeof DatePickerType];
 
+/** Figma wheel `Type=Day` (year/month/day) or `Type=Month` (year/month only). */
+export const DatePickerUnit = { day: 'day', month: 'month' } as const;
+export type DatePickerUnit = (typeof DatePickerUnit)[keyof typeof DatePickerUnit];
+
 const DEFAULT_WEEKDAY_LABELS = ['일', '월', '화', '수', '목', '금', '토'];
 
 export interface DatePickerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'> {
   type?: DatePickerType;
+  /** Wheel only. `month` hides the day column and `onChange` receives the 1st of the month. */
+  unit?: DatePickerUnit;
   value?: Date;
   defaultValue?: Date;
   onChange?: (date: Date) => void;
@@ -123,6 +129,7 @@ export interface DatePickerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'o
 export const DatePicker = forwardRef(function DatePicker(
   {
     type = DatePickerType.calendar,
+    unit = DatePickerUnit.day,
     value,
     defaultValue,
     onChange,
@@ -173,7 +180,8 @@ export const DatePicker = forwardRef(function DatePicker(
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
     const handleWheelChange = (nextYear: number, nextMonthIndex: number, nextDay: number) => {
-      const clampedDay = Math.min(nextDay, new Date(nextYear, nextMonthIndex + 1, 0).getDate());
+      const clampedDay =
+        unit === DatePickerUnit.month ? 1 : Math.min(nextDay, new Date(nextYear, nextMonthIndex + 1, 0).getDate());
       selectDate(new Date(nextYear, nextMonthIndex, clampedDay));
     };
 
@@ -197,13 +205,15 @@ export const DatePicker = forwardRef(function DatePicker(
             ariaLabel="월"
             formatValue={(m) => `${m + 1}월`}
           />
-          <WheelColumn
-            values={days}
-            selectedIndex={day - 1}
-            onSelect={(index) => handleWheelChange(year, monthIndex, days[index] ?? day)}
-            ariaLabel="일"
-            formatValue={(d) => `${d}일`}
-          />
+          {unit === DatePickerUnit.day && (
+            <WheelColumn
+              values={days}
+              selectedIndex={day - 1}
+              onSelect={(index) => handleWheelChange(year, monthIndex, days[index] ?? day)}
+              ariaLabel="일"
+              formatValue={(d) => `${d}일`}
+            />
+          )}
         </div>
       </div>
     );

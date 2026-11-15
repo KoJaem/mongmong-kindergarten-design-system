@@ -1,7 +1,9 @@
+import { vars } from '@kojaem/tokens';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import { expect, test, vi } from 'vitest';
 
-import { DatePicker, DatePickerType } from './DatePicker';
+import { DatePicker, DatePickerType, DatePickerUnit } from './DatePicker';
 
 test('renders the current month by default', () => {
   const now = new Date();
@@ -75,6 +77,26 @@ test('clicking a wheel year option calls onChange', () => {
   expect(calledWith.getFullYear()).toBe(2020);
 });
 
+test('unit=month hides the day column and onChange gives the 1st of the month', () => {
+  const onChange = vi.fn();
+  render(
+    <DatePicker
+      type={DatePickerType.wheel}
+      unit={DatePickerUnit.month}
+      defaultValue={new Date(2026, 4, 15)}
+      onChange={onChange}
+    />,
+  );
+
+  expect(screen.getAllByRole('listbox')).toHaveLength(2);
+  expect(screen.queryByRole('listbox', { name: '일' })).not.toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole('option', { name: '8월' }));
+
+  const calledWith: Date = onChange.mock.calls[0]?.[0];
+  expect([calledWith.getFullYear(), calledWith.getMonth(), calledWith.getDate()]).toEqual([2026, 7, 1]);
+});
+
 test('dragging a wheel column with the mouse updates its scrollTop', () => {
   render(<DatePicker type={DatePickerType.wheel} defaultValue={new Date(2026, 4, 3)} />);
 
@@ -103,4 +125,26 @@ test('forwards ref to the underlying div', () => {
   );
 
   expect(node).toBeInstanceOf(HTMLDivElement);
+});
+
+// happy-dom drops unresolved var() colors from getComputedStyle, so read the last matching CSS rule instead.
+const ruleColor = (el: Element) =>
+  Array.from(document.styleSheets)
+    .flatMap((sheet) => Array.from(sheet.cssRules))
+    .filter((rule): rule is CSSStyleRule => rule instanceof CSSStyleRule && el.matches(rule.selectorText))
+    .map((rule) => rule.style.color)
+    .filter(Boolean)
+    .at(-1);
+
+test('wheel items use Figma inverse text tokens (they sit on a light sheet)', () => {
+  render(<DatePicker type={DatePickerType.wheel} defaultValue={new Date(2026, 4, 3)} />);
+
+  expect(ruleColor(screen.getByRole('option', { name: '2026년' }))).toBe(vars.color.text.inverseSecondary);
+  expect(ruleColor(screen.getByRole('option', { name: '2025년' }))).toBe(vars.color.text.inverseTertiary);
+});
+
+test('calendar selected day uses text.strong like Figma', () => {
+  render(<DatePicker defaultValue={new Date(2026, 4, 3)} />);
+
+  expect(ruleColor(screen.getByLabelText('2026년 5월 3일'))).toBe(vars.color.text.strong);
 });

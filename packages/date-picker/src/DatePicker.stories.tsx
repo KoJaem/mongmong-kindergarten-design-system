@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { DatePicker, DatePickerType } from './DatePicker';
+import { DatePicker, DatePickerType, DatePickerUnit } from './DatePicker';
 
 const meta = {
   title: 'Components/DatePicker',
@@ -12,6 +12,7 @@ const meta = {
   },
   argTypes: {
     type: { control: 'select', options: Object.values(DatePickerType) },
+    unit: { control: 'select', options: Object.values(DatePickerUnit) },
   },
 } satisfies Meta<typeof DatePicker>;
 export default meta;
@@ -40,6 +41,14 @@ export const Wheel: Story = {
   args: {
     type: DatePickerType.wheel,
     defaultValue: new Date(2026, 4, 3),
+  },
+};
+
+export const WheelMonth: Story = {
+  args: {
+    type: DatePickerType.wheel,
+    unit: DatePickerUnit.month,
+    defaultValue: new Date(2026, 4, 1),
   },
 };
 
